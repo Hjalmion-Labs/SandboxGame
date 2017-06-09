@@ -2,12 +2,14 @@ package com.mills.world.tiles;
 
 import java.awt.Color;
 
+import com.mills.world.World;
+
 public class DirtTile extends Tile
 {
 
-	public DirtTile(int x, int y)
+	public DirtTile(World world, int x, int y)
 	{
-		super("DIRT", (byte)01, x, y);
+		super("DIRT", world, (byte)01, x, y);
 		TILECOLOR = new Color(139, 69, 19);
 	}
 	
@@ -23,7 +25,8 @@ public class DirtTile extends Tile
 	@Override
 	public void tick()
 	{
-		
+		x = oX + world.xOffset;
+		y = oY + world.yOffset;
 	}
 	
 }
