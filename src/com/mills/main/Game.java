@@ -14,13 +14,12 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import com.mills.handlers.InputHandler;
-import com.mills.rendering.Colors;
 import com.mills.rendering.Display;
 import com.mills.rendering.Screen;
 import com.mills.rendering.SpriteSheet;
+import com.mills.world.OverWorld;
+import com.mills.world.UnderWorld;
 import com.mills.world.World;
-import com.mills.world.tiles.DirtTile;
-import com.mills.world.tiles.Tile;
 
 public class Game extends Canvas implements Runnable{
 
@@ -45,9 +44,9 @@ public class Game extends Canvas implements Runnable{
 	
 	private static JFrame frame;
 
-	public static World overWorld = new World("OVER");
-	public static World underWorld = new World("UNDER");
-	private static World currentWorld;
+	public static World overWorld = new OverWorld("OVER");
+	public static World underWorld = new UnderWorld("UNDER");
+	public static World currentWorld;
 	
 	private final InputHandler inputHandler = new InputHandler(this);
 	
@@ -100,8 +99,8 @@ public class Game extends Canvas implements Runnable{
 		
 		/* Set up the level */
 		System.out.println("Set up the World");
-		currentWorld = overWorld;
-		
+		currentWorld = underWorld;
+		currentWorld.createWorld();
 		System.out.println("Set up the main window");
 
 		if(osName.contains("nux"))
@@ -182,21 +181,13 @@ public class Game extends Canvas implements Runnable{
 		currentWorld.tileHandler.tick();
 		
 		if(inputHandler.up.isPressed())
-			currentWorld.yOffset--;
-		if(inputHandler.down.isPressed())
 			currentWorld.yOffset++;
+		if(inputHandler.down.isPressed())
+			currentWorld.yOffset--;
 		if(inputHandler.left.isPressed())
 			currentWorld.xOffset++;
 		if(inputHandler.right.isPressed())
 			currentWorld.xOffset--;
-		if(inputHandler.k.isPressed())
-		{
-			if(currentWorld == overWorld)
-				currentWorld = underWorld;
-			else
-				currentWorld = overWorld;
-			System.out.println("Swapped to " + currentWorld);
-		}
 	}
 	
 	public void render()

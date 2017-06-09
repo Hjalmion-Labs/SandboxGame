@@ -4,17 +4,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.mills.main.Game;
-import com.mills.rendering.Screen;
 
 public class InputHandler implements KeyListener, MouseListener{
-
+	
+	protected long last = System.nanoTime();
+	protected double delta = 0;
+	
 	public InputHandler(Game game)
 	{
-		initializeKeys();
 		game.addKeyListener(this);
 		game.addMouseListener(this);
 	}
@@ -43,22 +42,13 @@ public class InputHandler implements KeyListener, MouseListener{
 		}
 	}
 	
-	public List<Key> keys = new ArrayList<Key>();
+//	public List<Key> keys = new ArrayList<Key>();
 	
 	public Key up = new Key();
 	public Key down = new Key();
 	public Key left = new Key();
 	public Key right = new Key();
 	public Key k = new Key();
-	
-	private void initializeKeys()
-	{
-		keys.add(up);
-		keys.add(down);
-		keys.add(left);
-		keys.add(right);
-		keys.add(k);
-	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -84,11 +74,6 @@ public class InputHandler implements KeyListener, MouseListener{
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		for(Key key : keys)
-		{
-			if(e.getKeyCode() == k.keyCode)
-				return;
-		}
 		toggleKey(e.getKeyCode(), true);
 	}
 
@@ -106,6 +91,8 @@ public class InputHandler implements KeyListener, MouseListener{
 	
 	public void toggleKey(int keyCode, boolean isPressed)
 	{
+		
+		
 		if(keyCode == KeyEvent.VK_W)	// UP
 		{
 			up.toggle(isPressed);
@@ -125,6 +112,17 @@ public class InputHandler implements KeyListener, MouseListener{
 		if(keyCode == KeyEvent.VK_K)	// K
 		{
 			k.toggle(isPressed);
+			long now = System.currentTimeMillis();
+			delta += (now - last);
+			if(delta >= 500)
+			{
+				if(Game.currentWorld == Game.overWorld)
+					Game.currentWorld = Game.underWorld;
+				else
+					Game.currentWorld = Game.overWorld;
+				System.out.println("Swapped to " + Game.currentWorld);
+			}
+			delta = 0;
 		}
 	}
 }

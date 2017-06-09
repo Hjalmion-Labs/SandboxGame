@@ -5,7 +5,7 @@ import com.mills.world.tiles.DirtTile;
 import com.mills.world.tiles.StoneTile;
 import com.mills.world.tiles.Tile;
 
-public class World {
+public abstract class World {
 
 	protected String name;
 	
@@ -27,38 +27,7 @@ public class World {
 	
 	public TileHandler tileHandler = new TileHandler();
 	
-	public World createWorld()
-	{
-		int x = 0;
-		int y = 0;
-		switch(name)
-		{
-			case "OVER":
-				for(int i = 0; i < World.WIDTH; i++)
-				{
-					x++;
-					for(int j = 0; j < World.HEIGHT; j++)
-					{
-						tileHandler.addTile(new DirtTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT));
-						y++;
-					}
-				}
-				return this;
-			case "UNDER":
-				for(int i = 0; i < World.WIDTH; i++)
-				{
-					x++;
-					for(int j = 0; j < World.HEIGHT; j++)
-					{
-						tileHandler.addTile(new StoneTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT));
-						y++;
-					}
-				}
-				return this;
-			default:
-				return new World("DEFAULT");
-		}
-	}
+	public abstract World createWorld();
 	
 	@Override
 	public String toString()
