@@ -30,11 +30,13 @@ public class TileHandler {
 		// Check to see if any IDs are duplicates
 		for(Tile tile : tiles)
 		{
-			if(t.getID() == t.getID() && !(t.getName().equalsIgnoreCase(tile.getName())))
+			// Don't allow the tiles to have the same ID if they do not share the same name (same Tile Type)
+			if(t.getID() == tile.getID() && !(t.getName().equalsIgnoreCase(tile.getName())))
 				throw new RuntimeException("Cannot have duplicate Tile IDs!\n\n" + tile.getName() + ":" + tile.getID() + "\n" + t.getName() + ":" + t.getID());
+			else
+				tiles.add(t);	// Add the tile to the list
 		}
-		// Actually add the tile to the list
-		tiles.add(t);
+		
 	}
 	
 }

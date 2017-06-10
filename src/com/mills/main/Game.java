@@ -13,6 +13,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.mills.handlers.EntityHandler;
 import com.mills.handlers.InputHandler;
 import com.mills.rendering.Display;
 import com.mills.rendering.Screen;
@@ -49,6 +50,7 @@ public class Game extends Canvas implements Runnable{
 	public static World currentWorld;
 	
 	private final InputHandler inputHandler = new InputHandler(this);
+	public static EntityHandler entityHandler = new EntityHandler();
 	
 	public synchronized void start()
 	{
@@ -79,7 +81,7 @@ public class Game extends Canvas implements Runnable{
 	private void init()
 	{
 		System.out.println("Initialize..");
-		
+		/*
 		int index = 0;
 		for(int r = 0; r < 6; r++)
 		{
@@ -95,18 +97,18 @@ public class Game extends Canvas implements Runnable{
 				}
 			}
 			
-		}
+		}*/
 		
 		/* Set up the level */
 		System.out.println("Set up the World");
-		currentWorld = underWorld;
-		currentWorld.createWorld();
+		currentWorld = overWorld;
+		
 		System.out.println("Set up the main window");
 
 		if(osName.contains("nux"))
-			frame = Display.create("Factory Game", LINUXWIDTH, LINUXHEIGHT);
+			frame = Display.create("Top Down 2D Game", LINUXWIDTH, LINUXHEIGHT);
 		else
-			frame = Display.create("Factory Game", WIDTH, HEIGHT);
+			frame = Display.create("Top Down 2D Game", WIDTH, HEIGHT);
 		setPreferredSize(new Dimension(World.WIDTH, World.HEIGHT));
 		setMaximumSize(new Dimension(World.WIDTH, World.HEIGHT));
 		setMinimumSize(new Dimension(World.WIDTH, World.HEIGHT));
@@ -136,6 +138,8 @@ public class Game extends Canvas implements Runnable{
 		double delta = 0;
 		
 		init();
+		
+		System.out.println("Entering Game Loop...");
 		
 		while(isRunning)
 		{
@@ -168,6 +172,7 @@ public class Game extends Canvas implements Runnable{
 			{
 				lastTimer += 1000;
 				System.out.println(ticks + " ticks, " + frames + " frames");
+				System.out.println("Current World: " + currentWorld);
 				frames = 0;
 				ticks = 0;
 			}
@@ -178,15 +183,15 @@ public class Game extends Canvas implements Runnable{
 	{
 		tickCount++;
 		
-		currentWorld.tileHandler.tick();
+		currentWorld.tickAllHandlers();
 		
-		if(inputHandler.up.isPressed())
+		if(inputHandler.UP.isPressed())
 			currentWorld.yOffset++;
-		if(inputHandler.down.isPressed())
+		if(inputHandler.DOWN.isPressed())
 			currentWorld.yOffset--;
-		if(inputHandler.left.isPressed())
+		if(inputHandler.LEFT.isPressed())
 			currentWorld.xOffset++;
-		if(inputHandler.right.isPressed())
+		if(inputHandler.RIGHT.isPressed())
 			currentWorld.xOffset--;
 	}
 	
@@ -204,7 +209,7 @@ public class Game extends Canvas implements Runnable{
 		/* START DRAWING */
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.drawImage(image, 0, 0, null);
-		currentWorld.tileHandler.render(g);
+		currentWorld.renderAllHandlers(g);
 		/* END DRAWING */
 		
 		g.dispose();

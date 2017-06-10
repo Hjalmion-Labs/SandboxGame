@@ -44,11 +44,25 @@ public class InputHandler implements KeyListener, MouseListener{
 	
 //	public List<Key> keys = new ArrayList<Key>();
 	
-	public Key up = new Key();
-	public Key down = new Key();
-	public Key left = new Key();
-	public Key right = new Key();
-	public Key k = new Key();
+	
+	/* Arrow Keys */
+	public final Key UP = new Key();
+	public final Key DOWN = new Key();
+	public final Key LEFT = new Key();
+	public final Key RIGHT = new Key();
+	
+	/* Modifier Keys */
+	public final Key ESCAPE = new Key();
+	public final Key SHIFT = new Key();
+	
+	/* Movement Keys */
+	public final Key KEY_W = new Key();
+	public final Key KEY_A = new Key();
+	public final Key KEY_S = new Key();
+	public final Key KEY_D = new Key();
+	
+	/* Other Keys */
+	public final Key KEY_K = new Key();
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -91,38 +105,25 @@ public class InputHandler implements KeyListener, MouseListener{
 	
 	public void toggleKey(int keyCode, boolean isPressed)
 	{
-		
-		
 		if(keyCode == KeyEvent.VK_W)	// UP
 		{
-			up.toggle(isPressed);
+			UP.toggle(isPressed);
 		}
 		if(keyCode == KeyEvent.VK_S)	// DOWN
 		{
-			down.toggle(isPressed);
+			DOWN.toggle(isPressed);
 		}
 		if(keyCode == KeyEvent.VK_A)	// LEFT
 		{
-			left.toggle(isPressed);
+			LEFT.toggle(isPressed);
 		}
 		if(keyCode == KeyEvent.VK_D)	// RIGHT
 		{
-			right.toggle(isPressed);
+			RIGHT.toggle(isPressed);
 		}
-		if(keyCode == KeyEvent.VK_K)	// K
+		if(keyCode == KeyEvent.VK_ESCAPE)	// ESCAPE
 		{
-			k.toggle(isPressed);
-			long now = System.currentTimeMillis();
-			delta += (now - last);
-			if(delta >= 500)
-			{
-				if(Game.currentWorld == Game.overWorld)
-					Game.currentWorld = Game.underWorld;
-				else
-					Game.currentWorld = Game.overWorld;
-				System.out.println("Swapped to " + Game.currentWorld);
-			}
-			delta = 0;
+			System.exit(0);  //TODO: Replace this with a method that gracefully shuts the game down
 		}
 	}
 }

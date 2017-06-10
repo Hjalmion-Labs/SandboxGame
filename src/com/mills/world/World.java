@@ -1,9 +1,7 @@
 package com.mills.world;
 
+import com.mills.handlers.EntityHandler;
 import com.mills.handlers.TileHandler;
-import com.mills.world.tiles.DirtTile;
-import com.mills.world.tiles.StoneTile;
-import com.mills.world.tiles.Tile;
 
 public abstract class World {
 
@@ -25,9 +23,29 @@ public abstract class World {
 		return name;
 	}
 	
-	public TileHandler tileHandler = new TileHandler();
+	protected TileHandler tileHandler;
+	protected EntityHandler entityHandler;
 	
-	public abstract World createWorld();
+	protected abstract void createWorld();
+	
+	/**
+	 * Runs the render method for each of this World's handlers
+	 * @param g - Graphics object to draw with
+	 */
+	public void renderAllHandlers(java.awt.Graphics g)
+	{
+		tileHandler.render(g);
+		entityHandler.render(g);
+	}
+	
+	/**
+	 * Runs the tick method for each of this World's handlers
+	 */
+	public void tickAllHandlers()
+	{
+		tileHandler.tick();
+		entityHandler.tick();
+	}
 	
 	@Override
 	public String toString()
