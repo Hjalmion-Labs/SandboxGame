@@ -11,17 +11,16 @@ public class UnderWorld extends World {
 
 	public UnderWorld(String name)
 	{
-		super(name);
+		super(name, 160, 160 / 12 * 9);
 		tileHandler = new TileHandler();
 		entityHandler = new EntityHandler();
-		createWorld();
 	}
 
-	protected void createWorld()
+	public void createWorld()
 	{
-		for(int i = 0; i < World.WIDTH; i++)
+		for(int i = 0; i < WIDTH; i++)
 		{
-			for(int j = 0; j < World.HEIGHT; j++)
+			for(int j = 0; j < HEIGHT; j++)
 			{
 				tileHandler.addTile(new StoneTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT));
 			}

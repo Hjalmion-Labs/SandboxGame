@@ -5,7 +5,7 @@ import com.mills.world.World;
 public abstract class Tile {
 
 	protected String name;
-	protected byte id;
+	protected TileType type;
 	protected int x;
 	protected int y;
 	protected int oX;
@@ -15,11 +15,10 @@ public abstract class Tile {
 	public static final int TILEWIDTH = 50;
 	public static final int TILEHEIGHT = 50;
 	
-	public Tile(String name, World world, byte id, int x, int y)
+	public Tile(TileType type, World world, int x, int y)
 	{
-		this.name = name;
+		this.type = type;
 		this.world = world;
-		this.id = id;
 		this.oX = x;
 		this.oY = y;
 	}
@@ -33,20 +32,15 @@ public abstract class Tile {
 	{
 		return y;
 	}
-	
-	public String getName()
-	{
-		return name;
-	}
 
 	public World getWorld()
 	{
 		return world;
 	}
 	
-	public byte getID()
+	public TileType getType()
 	{
-		return id;
+		return type;
 	}
 	
 	public abstract void render(java.awt.Graphics g);

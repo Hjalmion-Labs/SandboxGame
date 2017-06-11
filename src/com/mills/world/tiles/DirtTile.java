@@ -9,8 +9,8 @@ public class DirtTile extends Tile
 
 	public DirtTile(World world, int x, int y)
 	{
-		super("DIRT", world, (byte)01, x, y);
-		TILECOLOR = new Color(139, 69, 19);
+		super(TileType.DIRT, world, x, y);
+		TILECOLOR = type.getColor();
 	}
 	
 	@Override

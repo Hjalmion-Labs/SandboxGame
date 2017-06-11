@@ -7,15 +7,17 @@ public abstract class World {
 
 	protected String name;
 	
-	public static final int WIDTH = 160;
-	public static final int HEIGHT = WIDTH / 16 * 9;
+	protected int WIDTH;
+	protected int HEIGHT;
 	
 	public int xOffset = 0;
 	public int yOffset = 0;
 	
-	public World(String name)
+	public World(String name, int width, int height)
 	{
 		this.name = name;
+		WIDTH = width;
+		HEIGHT = height;
 	}
 	
 	public String getName()
@@ -26,7 +28,12 @@ public abstract class World {
 	protected TileHandler tileHandler;
 	protected EntityHandler entityHandler;
 	
-	protected abstract void createWorld();
+	public abstract void createWorld();
+	
+	public void destroyWorld()
+	{
+		tileHandler.empty();
+	}
 	
 	/**
 	 * Runs the render method for each of this World's handlers
@@ -45,6 +52,16 @@ public abstract class World {
 	{
 		tileHandler.tick();
 		entityHandler.tick();
+	}
+	
+	public int getWidth()
+	{
+		return WIDTH;
+	}
+	
+	public int getHeight()
+	{
+		return HEIGHT;
 	}
 	
 	@Override

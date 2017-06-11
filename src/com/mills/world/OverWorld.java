@@ -12,21 +12,23 @@ public class OverWorld extends World
 
 	public OverWorld(String name)
 	{
-		super(name);
-		tileHandler = new TileHandler();
-		entityHandler = new EntityHandler();
-		createWorld();
+		super(name, 250, 250 / 12 * 9);
+		this.tileHandler = new TileHandler();
+		this.entityHandler = new EntityHandler();
 	}
 	
-	protected void createWorld()
+	public void createWorld()
 	{
-		for(int i = 0; i < World.WIDTH; i++)
+		int temp = 0;
+		for(int i = 0; i < WIDTH; i++)
 		{
-			for(int j = 0; j < World.HEIGHT; j++)
+			for(int j = 0; j < HEIGHT; j++)
 			{
 				tileHandler.addTile(new DirtTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT));
+				temp++;
 			}
 		}
+		System.out.println(temp + " tiles added to " + this.name + " (size of: " + tileHandler.size() + ")");
 	}
 	
 	public void populateWorld(int numEntities)

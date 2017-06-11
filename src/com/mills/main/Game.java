@@ -9,18 +9,21 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
 import com.mills.handlers.EntityHandler;
 import com.mills.handlers.InputHandler;
+import com.mills.handlers.TileHandler;
+import com.mills.handlers.WorldHandler;
 import com.mills.rendering.Display;
 import com.mills.rendering.Screen;
-import com.mills.rendering.SpriteSheet;
+import com.mills.world.DefaultWorld;
 import com.mills.world.OverWorld;
 import com.mills.world.UnderWorld;
 import com.mills.world.World;
+import com.mills.world.tiles.DirtTile;
+import com.mills.world.tiles.Tile;
 
 public class Game extends Canvas implements Runnable{
 
@@ -39,18 +42,18 @@ public class Game extends Canvas implements Runnable{
 	public static final String osName = System.getProperty("os.name");
 
 	private static final BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-	private static int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
-	private static int[] colors = new int[6 * 6 * 6];
+//	private static int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+//	private static int[] colors = new int[6 * 6 * 6];
 	private Screen screen;
 	
 	private static JFrame frame;
 
-	public static World overWorld = new OverWorld("OVER");
-	public static World underWorld = new UnderWorld("UNDER");
 	public static World currentWorld;
 	
 	private final InputHandler inputHandler = new InputHandler(this);
-	public static EntityHandler entityHandler = new EntityHandler();
+	private final EntityHandler entityHandler = new EntityHandler();
+	private final WorldHandler worldHandler = new WorldHandler();
+	TileHandler tiles = new TileHandler();
 	
 	public synchronized void start()
 	{
@@ -81,27 +84,14 @@ public class Game extends Canvas implements Runnable{
 	private void init()
 	{
 		System.out.println("Initialize..");
-		/*
-		int index = 0;
-		for(int r = 0; r < 6; r++)
-		{
-			for(int g = 0; g < 6; g++)
-			{
-				for(int b = 0; b < 6; b++)
-				{
-					int rr = (r * 255 / 5);
-					int gg = (g * 255 / 5);
-					int bb = (b * 255 / 5);
-					
-					colors[index++] = rr << 16 | gg << 8 | bb;
-				}
-			}
-			
-		}*/
 		
-		/* Set up the level */
+		/* Set up the World */
 		System.out.println("Set up the World");
-		currentWorld = overWorld;
+		worldHandler.add(new OverWorld("Overworld"));
+		worldHandler.add(new UnderWorld("Underworld"));
+		
+		currentWorld = worldHandler.get("Overworld");
+		currentWorld.createWorld();
 		
 		System.out.println("Set up the main window");
 
@@ -109,9 +99,9 @@ public class Game extends Canvas implements Runnable{
 			frame = Display.create("Top Down 2D Game", LINUXWIDTH, LINUXHEIGHT);
 		else
 			frame = Display.create("Top Down 2D Game", WIDTH, HEIGHT);
-		setPreferredSize(new Dimension(World.WIDTH, World.HEIGHT));
-		setMaximumSize(new Dimension(World.WIDTH, World.HEIGHT));
-		setMinimumSize(new Dimension(World.WIDTH, World.HEIGHT));
+		setPreferredSize(new Dimension(currentWorld.getWidth(), currentWorld.getHeight()));
+		setMaximumSize(new Dimension(currentWorld.getWidth(), currentWorld.getHeight()));
+		setMinimumSize(new Dimension(currentWorld.getWidth(), currentWorld.getHeight()));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.add(this, BorderLayout.CENTER);
@@ -121,7 +111,7 @@ public class Game extends Canvas implements Runnable{
 		frame.setVisible(true);
 		requestFocus();
 		
-		screen = new Screen(World.WIDTH, World.HEIGHT, new SpriteSheet("/SpriteSheet.png"));
+//		screen = new Screen(currentWorld.WIDTH, currentWorld.HEIGHT, new SpriteSheet("/SpriteSheet.png"));
 		
 		System.out.println("Done Initialization");
 	}
@@ -172,7 +162,7 @@ public class Game extends Canvas implements Runnable{
 			{
 				lastTimer += 1000;
 				System.out.println(ticks + " ticks, " + frames + " frames");
-				System.out.println("Current World: " + currentWorld);
+				System.out.println("Current World: " + worldHandler.getCurrentWorld());
 				frames = 0;
 				ticks = 0;
 			}
@@ -183,7 +173,7 @@ public class Game extends Canvas implements Runnable{
 	{
 		tickCount++;
 		
-		currentWorld.tickAllHandlers();
+		worldHandler.tick();
 		
 		if(inputHandler.UP.isPressed())
 			currentWorld.yOffset++;
@@ -209,7 +199,7 @@ public class Game extends Canvas implements Runnable{
 		/* START DRAWING */
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.drawImage(image, 0, 0, null);
-		currentWorld.renderAllHandlers(g);
+		worldHandler.render(g);
 		/* END DRAWING */
 		
 		g.dispose();
