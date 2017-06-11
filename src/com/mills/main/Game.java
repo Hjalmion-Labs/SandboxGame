@@ -1,28 +1,24 @@
 package com.mills.main;
 
-import static java.lang.System.err;
-import static java.lang.System.out;
-
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import com.mills.entities.Player;
 import com.mills.handlers.EntityHandler;
 import com.mills.handlers.InputHandler;
-import com.mills.handlers.TileHandler;
 import com.mills.handlers.WorldHandler;
 import com.mills.rendering.Display;
-import com.mills.rendering.Screen;
-import com.mills.world.DefaultWorld;
 import com.mills.world.OverWorld;
 import com.mills.world.UnderWorld;
 import com.mills.world.World;
-import com.mills.world.tiles.DirtTile;
 import com.mills.world.tiles.Tile;
 
 public class Game extends Canvas implements Runnable{
@@ -42,9 +38,6 @@ public class Game extends Canvas implements Runnable{
 	public static final String osName = System.getProperty("os.name");
 
 	private static final BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-//	private static int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
-//	private static int[] colors = new int[6 * 6 * 6];
-	private Screen screen;
 	
 	private static JFrame frame;
 
@@ -53,7 +46,8 @@ public class Game extends Canvas implements Runnable{
 	private final InputHandler inputHandler = new InputHandler(this);
 	private final EntityHandler entityHandler = new EntityHandler();
 	private final WorldHandler worldHandler = new WorldHandler();
-	TileHandler tiles = new TileHandler();
+	
+	public Player player;
 	
 	public synchronized void start()
 	{
@@ -75,9 +69,9 @@ public class Game extends Canvas implements Runnable{
 			isRunning = false;
 		} catch(InterruptedException e)
 		{
-			out.println("Error encountered while stopping thread!");
+			System.out.println("Error encountered while stopping thread!");
 			e.printStackTrace();
-			err.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 
@@ -92,6 +86,12 @@ public class Game extends Canvas implements Runnable{
 		
 		currentWorld = worldHandler.get("Overworld");
 		currentWorld.createWorld();
+		
+		/* Instantiate the Player */
+		player = new Player("Player1", currentWorld, WIDTH / 2, HEIGHT / 2, 5);
+		
+		/* Add Entities to the world's entity handler */
+		currentWorld.addEntity(player);
 		
 		System.out.println("Set up the main window");
 
@@ -109,6 +109,7 @@ public class Game extends Canvas implements Runnable{
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		frame.requestFocus();
 		requestFocus();
 		
 //		screen = new Screen(currentWorld.WIDTH, currentWorld.HEIGHT, new SpriteSheet("/SpriteSheet.png"));
@@ -163,6 +164,8 @@ public class Game extends Canvas implements Runnable{
 				lastTimer += 1000;
 				System.out.println(ticks + " ticks, " + frames + " frames");
 				System.out.println("Current World: " + worldHandler.getCurrentWorld());
+				System.out.println("X: " + (currentWorld.xOffset / Tile.TILEWIDTH) + "\nY: " + (currentWorld.yOffset / Tile.TILEHEIGHT));
+
 				frames = 0;
 				ticks = 0;
 			}
@@ -175,18 +178,27 @@ public class Game extends Canvas implements Runnable{
 		
 		worldHandler.tick();
 		
+		if(currentWorld.yOffset > 0)
+			currentWorld.yOffset = 0;
+		else if(currentWorld.yOffset > currentWorld.getHeight())
+			currentWorld.yOffset = currentWorld.getHeight();
+		if(currentWorld.xOffset > 0)
+			currentWorld.xOffset = 0;
+		else if(currentWorld.xOffset > currentWorld.getWidth())
+			currentWorld.xOffset = currentWorld.getWidth();
+		
 		if(inputHandler.UP.isPressed())
-			currentWorld.yOffset++;
+			currentWorld.yOffset += player.getSpeed();
 		if(inputHandler.DOWN.isPressed())
-			currentWorld.yOffset--;
+			currentWorld.yOffset -= player.getSpeed();
 		if(inputHandler.LEFT.isPressed())
-			currentWorld.xOffset++;
+			currentWorld.xOffset += player.getSpeed();
 		if(inputHandler.RIGHT.isPressed())
-			currentWorld.xOffset--;
+			currentWorld.xOffset -= player.getSpeed();
 	}
 	
 	public void render()
-	{
+	{		
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null)
 		{
@@ -195,11 +207,18 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		Graphics g = bs.getDrawGraphics();
+		Graphics2D g2 = (Graphics2D) g;
 		
 		/* START DRAWING */
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.drawImage(image, 0, 0, null);
 		worldHandler.render(g);
+		/* Set Rendering Hints so we can draw the player nice and smooth */
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		entityHandler.render(g);
+		/* Turn AntiAlias off so it doesn't affect any other objects being drawn */
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+		/*  */
 		/* END DRAWING */
 		
 		g.dispose();

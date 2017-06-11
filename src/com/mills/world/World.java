@@ -1,7 +1,9 @@
 package com.mills.world;
 
+import com.mills.entities.Entity;
 import com.mills.handlers.EntityHandler;
 import com.mills.handlers.TileHandler;
+import com.mills.world.tiles.Tile;
 
 public abstract class World {
 
@@ -12,6 +14,9 @@ public abstract class World {
 	
 	public int xOffset = 0;
 	public int yOffset = 0;
+	
+	public int x = 0;
+	public int y = 0;
 	
 	public World(String name, int width, int height)
 	{
@@ -52,6 +57,11 @@ public abstract class World {
 	{
 		tileHandler.tick();
 		entityHandler.tick();
+	}
+	
+	public void addEntity(Entity ent)
+	{
+		entityHandler.addEntity(ent);
 	}
 	
 	public int getWidth()

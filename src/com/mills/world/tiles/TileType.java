@@ -6,7 +6,7 @@ public enum TileType
 {
 	DIRT("DIRT", (byte)01, new Color(139, 69, 19)),
 	STONE("STONE", (byte)02, Color.GRAY),
-	GRASS("GRASS", (byte)03, Color.GREEN);
+	GRASS("GRASS", (byte)03, Color.GREEN.darker());
 	
 	private String name;
 	private byte id;
@@ -16,6 +16,7 @@ public enum TileType
 	{
 		this.name = name;
 		this.id = id;
+		this.tileColor = color;
 	}
 	
 	public String getName()

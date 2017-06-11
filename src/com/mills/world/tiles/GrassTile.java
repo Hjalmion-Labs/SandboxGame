@@ -17,9 +17,9 @@ public class GrassTile extends Tile
 	public void render(Graphics g)
 	{
 		g.setColor(TILECOLOR);
-		g.fillRect(x, x, TILEWIDTH, TILEHEIGHT);
+		g.fillRect(x, y, TILEWIDTH, TILEHEIGHT);
 		g.setColor(Color.BLACK);
-		g.drawRect(x, x, TILEWIDTH, TILEHEIGHT);
+		g.drawRect(x, y, TILEWIDTH, TILEHEIGHT);
 	}
 
 	@Override

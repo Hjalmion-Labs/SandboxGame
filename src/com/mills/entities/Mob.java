@@ -1,11 +1,13 @@
 package com.mills.entities;
 
+import com.mills.world.World;
+
 public abstract class Mob extends Entity 
 {
 
-	public Mob(String name, int x, int y)
+	public Mob(String name, World world, int x, int y)
 	{
-		super(name, x, y);
+		super(name, world, x, y);
 		this.color = java.awt.Color.BLUE;
 	}
 

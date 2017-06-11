@@ -11,11 +11,13 @@ public class InputHandler implements KeyListener, MouseListener{
 	
 	protected long last = System.nanoTime();
 	protected double delta = 0;
+	private Game game;
 	
 	public InputHandler(Game game)
 	{
-		game.addKeyListener(this);
-		game.addMouseListener(this);
+		this.game = game;
+		this.game.addKeyListener(this);
+		this.game.addMouseListener(this);
 	}
 	
 	public class Key
@@ -95,6 +97,10 @@ public class InputHandler implements KeyListener, MouseListener{
 	public void keyReleased(KeyEvent e)
 	{
 		toggleKey(e.getKeyCode(), false);
+		if(e.getKeyCode() == KeyEvent.VK_SHIFT)
+		{
+			game.player.resetSpeed();
+		}
 	}
 
 	@Override
@@ -120,6 +126,10 @@ public class InputHandler implements KeyListener, MouseListener{
 		if(keyCode == KeyEvent.VK_D)	// RIGHT
 		{
 			RIGHT.toggle(isPressed);
+		}
+		if(keyCode == KeyEvent.VK_SHIFT)
+		{
+			game.player.mulSpeed(2);
 		}
 		if(keyCode == KeyEvent.VK_ESCAPE)	// ESCAPE
 		{

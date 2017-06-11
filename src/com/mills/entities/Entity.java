@@ -1,5 +1,7 @@
 package com.mills.entities;
 
+import com.mills.world.World;
+
 public abstract class Entity {
 
 	protected String name;
@@ -8,11 +10,13 @@ public abstract class Entity {
 	protected int speed;
 	protected int width;
 	protected int height;
+	protected World world;
 	protected java.awt.Color color;
 	
-	public Entity(String name, int x, int y)
+	public Entity(String name, World world, int x, int y)
 	{
 		this.name = name;
+		this.world = world;
 		this.x = x;
 		this.y = y;
 	}
