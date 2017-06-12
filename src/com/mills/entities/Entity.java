@@ -1,6 +1,7 @@
 package com.mills.entities;
 
 import com.mills.world.World;
+import com.mills.world.tiles.Tile;
 
 public abstract class Entity {
 
@@ -29,9 +30,24 @@ public abstract class Entity {
 		return name;
 	}
 	
+	public void setX(int x)
+	{
+		this.x = x;
+	}
+	
 	public int getX()
 	{
 		return x;
+	}
+	
+	public int getTileX()
+	{
+		return x / Tile.TILEWIDTH;
+	}
+	
+	public void setY(int y)
+	{
+		this.y = y;
 	}
 	
 	public int getY()
@@ -39,8 +55,21 @@ public abstract class Entity {
 		return y;
 	}
 	
+	public int getTileY()
+	{
+		return y / Tile.TILEHEIGHT;
+	}
+	
 	public int getSpeed()
 	{
 		return speed;
+	}
+	
+	public void keepInBounds()
+	{
+		if(x < 0) x = 0;
+		if(x > world.getWidth()) x = world.getWidth();
+		if(y < 0) y = 0;
+		if(y > world.getHeight()) y = world.getHeight();
 	}
 }

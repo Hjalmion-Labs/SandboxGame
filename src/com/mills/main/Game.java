@@ -164,7 +164,8 @@ public class Game extends Canvas implements Runnable{
 				lastTimer += 1000;
 				System.out.println(ticks + " ticks, " + frames + " frames");
 				System.out.println("Current World: " + worldHandler.getCurrentWorld());
-				System.out.println("X: " + (currentWorld.xOffset / Tile.TILEWIDTH) + "\nY: " + (currentWorld.yOffset / Tile.TILEHEIGHT));
+				System.out.println("X: " + (player.getX() / Tile.TILEWIDTH) + "\nY: " + (player.getY() / Tile.TILEHEIGHT));
+				
 
 				frames = 0;
 				ticks = 0;
@@ -178,23 +179,28 @@ public class Game extends Canvas implements Runnable{
 		
 		worldHandler.tick();
 		
-		if(currentWorld.yOffset > 0)
-			currentWorld.yOffset = 0;
-		else if(currentWorld.yOffset > currentWorld.getHeight())
-			currentWorld.yOffset = currentWorld.getHeight();
-		if(currentWorld.xOffset > 0)
-			currentWorld.xOffset = 0;
-		else if(currentWorld.xOffset > currentWorld.getWidth())
-			currentWorld.xOffset = currentWorld.getWidth();
-		
 		if(inputHandler.UP.isPressed())
-			currentWorld.yOffset += player.getSpeed();
+			if(currentWorld.yOffset < 0 && player.getTileY() <= 5)
+				currentWorld.yOffset += player.getSpeed();
+			else
+				player.setY(player.getY() - player.getSpeed());
 		if(inputHandler.DOWN.isPressed())
-			currentWorld.yOffset -= player.getSpeed();
+			if(currentWorld.yOffset < currentWorld.getHeight() && player.getTileY() <= 5)
+				currentWorld.yOffset -= player.getSpeed();
+			else
+				player.setY(player.getY() + player.getSpeed());
 		if(inputHandler.LEFT.isPressed())
-			currentWorld.xOffset += player.getSpeed();
+			if(currentWorld.xOffset < 0 && player.getTileX() <= 5)
+				currentWorld.xOffset += player.getSpeed();
+			else
+				player.setX(player.getX() - player.getSpeed());
 		if(inputHandler.RIGHT.isPressed())
-			currentWorld.xOffset -= player.getSpeed();
+			if(currentWorld.xOffset < currentWorld.getWidth())
+			{
+					currentWorld.xOffset -= player.getSpeed();
+			} else
+				if(player.getTileX() <= 5)
+					player.setX(player.getX() + player.getSpeed());
 	}
 	
 	public void render()

@@ -24,7 +24,7 @@ public class Player extends Entity
 	@Override
 	public void tick()
 	{
-		
+		keepInBounds();
 	}
 
 	@Override
