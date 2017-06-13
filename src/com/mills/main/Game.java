@@ -180,27 +180,34 @@ public class Game extends Canvas implements Runnable{
 		worldHandler.tick();
 		
 		if(inputHandler.UP.isPressed())
+		{
 			if(currentWorld.yOffset < 0 && player.getTileY() <= 5)
 				currentWorld.yOffset += player.getSpeed();
 			else
 				player.setY(player.getY() - player.getSpeed());
+		}
 		if(inputHandler.DOWN.isPressed())
-			if(currentWorld.yOffset < currentWorld.getHeight() && player.getTileY() <= 5)
+		{
+			if(currentWorld.yOffset < currentWorld.getHeight() && player.getTileY() >= 5)
 				currentWorld.yOffset -= player.getSpeed();
-			else
+			else if(player.getTileY() < 5)
 				player.setY(player.getY() + player.getSpeed());
+		}
 		if(inputHandler.LEFT.isPressed())
+		{
 			if(currentWorld.xOffset < 0 && player.getTileX() <= 5)
 				currentWorld.xOffset += player.getSpeed();
 			else
 				player.setX(player.getX() - player.getSpeed());
+		}
 		if(inputHandler.RIGHT.isPressed())
-			if(currentWorld.xOffset < currentWorld.getWidth())
-			{
-					currentWorld.xOffset -= player.getSpeed();
-			} else
-				if(player.getTileX() <= 5)
-					player.setX(player.getX() + player.getSpeed());
+		{
+			if(currentWorld.xOffset < currentWorld.getWidth() && player.getTileX() >= 5)
+				currentWorld.xOffset -= player.getSpeed();
+			else if(player.getTileX() < 5)
+				player.setX(player.getX() + player.getSpeed());
+		}
+			
 	}
 	
 	public void render()
