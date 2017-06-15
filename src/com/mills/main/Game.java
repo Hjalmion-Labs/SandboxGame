@@ -181,30 +181,30 @@ public class Game extends Canvas implements Runnable{
 		
 		if(inputHandler.UP.isPressed())
 		{
-			if(currentWorld.yOffset < 0 && player.getTileY() <= 5)
+			if(currentWorld.yOffset < 0 && player.getTileY() <= 4)	// If the Player is in the World (not in the void) and within the 5 Tile "square", move the World
 				currentWorld.yOffset += player.getSpeed();
-			else
+			else													// Otherwise just move the Player
 				player.setY(player.getY() - player.getSpeed());
 		}
 		if(inputHandler.DOWN.isPressed())
 		{
-			if(currentWorld.yOffset < currentWorld.getHeight() && player.getTileY() >= 5)
+			if(currentWorld.yOffset < currentWorld.getHeight() && player.getTileY() >= 4)
 				currentWorld.yOffset -= player.getSpeed();
-			else if(player.getTileY() < 5)
-				player.setY(player.getY() + player.getSpeed());
+			else if(player.getTileY() <= 4)						// If Player is less than or at 5 tiles away from the edge, move the Player
+				player.setY(player.getY() + player.getSpeed());	
 		}
 		if(inputHandler.LEFT.isPressed())
 		{
-			if(currentWorld.xOffset < 0 && player.getTileX() <= 5)
+			if(currentWorld.xOffset < 0 && player.getTileX() <= 4)	// If the Player is in the World (not in the void) and within the 5 Tile "square". move the World
 				currentWorld.xOffset += player.getSpeed();
 			else
-				player.setX(player.getX() - player.getSpeed());
+				player.setX(player.getX() - player.getSpeed());		// Otherwise just move the Player
 		}
 		if(inputHandler.RIGHT.isPressed())
 		{
-			if(currentWorld.xOffset < currentWorld.getWidth() && player.getTileX() >= 5)
+			if(currentWorld.xOffset < currentWorld.getWidth() && player.getTileX() >= 4)	// If the Player is less than the width of the World and outside the 5 Tile "square", move the World
 				currentWorld.xOffset -= player.getSpeed();
-			else if(player.getTileX() < 5)
+			else if(player.getTileX() <= 4)													// If the player is less than or at 5 Tiles away from the edge, move the Player
 				player.setX(player.getX() + player.getSpeed());
 		}
 			
