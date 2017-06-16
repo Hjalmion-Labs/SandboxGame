@@ -34,6 +34,12 @@ public class Player extends Entity
 		g.fillOval(x, y, width, height);
 	}
 	
+	public void placeAt(Tile xTile, Tile yTile)
+	{
+		setTileX(xTile);
+		setTileY(yTile);
+	}
+	
 	public void resetSpeed()
 	{
 		speed = originalSpeed;

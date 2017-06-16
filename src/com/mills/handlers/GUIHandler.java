@@ -1,6 +1,6 @@
 package com.mills.handlers;
 
-import com.mills.rendering.gui.Toolbar;
+import com.mills.rendering.gui.toolbar.Toolbar;
 
 public class GUIHandler
 {

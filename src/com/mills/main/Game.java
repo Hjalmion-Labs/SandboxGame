@@ -91,6 +91,7 @@ public class Game extends Canvas implements Runnable{
 		
 		/* Instantiate the Player */
 		player = new Player("Player1", currentWorld, WIDTH / 2, HEIGHT / 2, 5);
+		player.setPos(currentWorld.getTile(currentWorld.getWidth() / 2), currentWorld.getTile(currentWorld.getHeight() / 2));
 		
 		/* Add Entities to the world's entity handler */
 		currentWorld.addEntity(player);

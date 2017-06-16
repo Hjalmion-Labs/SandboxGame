@@ -8,6 +8,8 @@ public abstract class Entity {
 	protected String name;
 	protected int x;
 	protected int y;
+	protected int tileX;
+	protected int tileY;
 	protected int speed;
 	protected int width;
 	protected int height;
@@ -30,6 +32,11 @@ public abstract class Entity {
 		return name;
 	}
 	
+	public void setPos(Tile x, Tile y)
+	{
+		
+	}
+	
 	public void setX(int x)
 	{
 		this.x = x;
@@ -45,6 +52,11 @@ public abstract class Entity {
 		return x / Tile.TILEWIDTH;
 	}
 	
+	public void setTileX(Tile tile)
+	{
+		tileX = tile.getX() + (Tile.TILEWIDTH / 2);
+	}
+	
 	public void setY(int y)
 	{
 		this.y = y;
@@ -58,6 +70,11 @@ public abstract class Entity {
 	public int getTileY()
 	{
 		return y / Tile.TILEHEIGHT;
+	}
+	
+	public void setTileY(Tile tile)
+	{
+		tileY = tile.getY() + (Tile.TILEHEIGHT / 2);
 	}
 	
 	public int getSpeed()

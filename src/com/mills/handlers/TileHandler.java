@@ -25,6 +25,11 @@ public class TileHandler {
 		}
 	}
 	
+	public Tile getTileAt(int index)
+	{
+		return tiles.get(index);
+	}
+	
 	public int size()
 	{
 		return tiles.size();

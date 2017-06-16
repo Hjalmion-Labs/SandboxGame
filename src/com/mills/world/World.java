@@ -64,6 +64,11 @@ public abstract class World {
 		entityHandler.addEntity(ent);
 	}
 	
+	public Tile getTile(int index)
+	{
+		return tileHandler.getTileAt(index);
+	}
+	
 	public int getWidth()
 	{
 		return WIDTH;
