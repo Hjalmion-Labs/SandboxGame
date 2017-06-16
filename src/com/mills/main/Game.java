@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import com.mills.entities.Player;
+import com.mills.entities.Zombie;
 import com.mills.handlers.EntityHandler;
 import com.mills.handlers.GUIHandler;
 import com.mills.handlers.InputHandler;
@@ -93,8 +94,12 @@ public class Game extends Canvas implements Runnable{
 		player = new Player("Player1", currentWorld, WIDTH / 2, HEIGHT / 2, 5);
 		player.setPos(currentWorld.getTile(currentWorld.getWidth() / 2), currentWorld.getTile(currentWorld.getHeight() / 2));
 		
+		/* Create a test Zombie */
+		Zombie zombie = new Zombie("George", currentWorld, 50, 50);
+		
 		/* Add Entities to the world's entity handler */
 		currentWorld.addEntity(player);
+		currentWorld.addEntity(zombie);
 		
 		System.out.println("Set up the main window");
 
