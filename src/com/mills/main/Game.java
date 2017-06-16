@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import com.mills.entities.Player;
 import com.mills.handlers.EntityHandler;
+import com.mills.handlers.GUIHandler;
 import com.mills.handlers.InputHandler;
 import com.mills.handlers.WorldHandler;
 import com.mills.rendering.Display;
@@ -46,6 +47,7 @@ public class Game extends Canvas implements Runnable{
 	private final InputHandler inputHandler = new InputHandler(this);
 	private final EntityHandler entityHandler = new EntityHandler();
 	private final WorldHandler worldHandler = new WorldHandler();
+	private final GUIHandler guiHandler = new GUIHandler();
 	
 	public Player player;
 	
@@ -207,6 +209,8 @@ public class Game extends Canvas implements Runnable{
 			else if(player.getTileX() <= 4)													// If the player is less than or at 5 Tiles away from the edge, move the Player
 				player.setX(player.getX() + player.getSpeed());
 		}
+		
+		guiHandler.tick();
 			
 	}
 	
@@ -231,7 +235,7 @@ public class Game extends Canvas implements Runnable{
 		entityHandler.render(g);
 		/* Turn AntiAlias off so it doesn't affect any other objects being drawn */
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-		/*  */
+		guiHandler.render(g);
 		/* END DRAWING */
 		
 		g.dispose();
