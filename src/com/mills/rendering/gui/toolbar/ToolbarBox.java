@@ -47,6 +47,11 @@ public class ToolbarBox
 		color = tile.getColor();
 	}
 	
+	public TileType getTile()
+	{
+		return tile;
+	}
+	
 	public int getX() {
 		return x;
 	}

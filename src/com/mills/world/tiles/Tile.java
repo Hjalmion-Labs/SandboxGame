@@ -10,6 +10,8 @@ public abstract class Tile {
 	protected int y;
 	protected int oX;
 	protected int oY;
+	protected int tileX;
+	protected int tileY;
 	protected World world;
 	protected java.awt.Color TILECOLOR;
 	public static final int TILEWIDTH = 50;
@@ -21,11 +23,30 @@ public abstract class Tile {
 		this.world = world;
 		this.oX = x;
 		this.oY = y;
+		tileX = x / TILEWIDTH;
+		tileY = y / TILEHEIGHT;
 	}
 
+	public boolean contains(int x, int y)
+	{
+		if((x >= this.x && x < Tile.TILEWIDTH) && (y >= this.y && y < Tile.TILEHEIGHT))
+				return true;
+		return false;
+	}
+	
+	public void setType(TileType type)
+	{
+		this.type = type;
+	}
+	
 	public int getX()
 	{
 		return x;
+	}
+	
+	public int getTileX()
+	{
+		return tileX;
 	}
 	
 	public int getY()
@@ -33,6 +54,11 @@ public abstract class Tile {
 		return y;
 	}
 
+	public int getTileY()
+	{
+		return tileY;
+	}
+	
 	public World getWorld()
 	{
 		return world;

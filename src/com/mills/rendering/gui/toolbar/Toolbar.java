@@ -24,6 +24,17 @@ public class Toolbar
 	
 	private List<ToolbarBox> boxes = new ArrayList<ToolbarBox>();
 	
+	private ToolbarBox box1 = new ToolbarBox();	// First Box on the Toolbar (furthest left)
+	private ToolbarBox box2 = new ToolbarBox();
+	private ToolbarBox box3 = new ToolbarBox();
+	private ToolbarBox box4 = new ToolbarBox();
+	private ToolbarBox box5 = new ToolbarBox();
+	private ToolbarBox box6 = new ToolbarBox();
+	private ToolbarBox box7 = new ToolbarBox();
+	private ToolbarBox box8 = new ToolbarBox();
+	private ToolbarBox box9 = new ToolbarBox();
+	private ToolbarBox box0 = new ToolbarBox();	// Last Box on the Toolbar (furthest right)
+	
 	public Toolbar()
 	{
 		x = 250;
@@ -40,9 +51,19 @@ public class Toolbar
 	
 	private void initialize()
 	{
-		for(int i = 0; i < 10; i++)
+		boxes.add(box1);
+		boxes.add(box2);
+		boxes.add(box3);
+		boxes.add(box4);
+		boxes.add(box5);
+		boxes.add(box6);
+		boxes.add(box7);
+		boxes.add(box8);
+		boxes.add(box9);
+		boxes.add(box0);
+		
+		for(int i = 0; i < boxes.size(); i++)
 		{
-			boxes.add(i, new ToolbarBox());
 			assignTile(i);
 		}
 	}
@@ -52,17 +73,33 @@ public class Toolbar
 		switch(i)
 		{
 			case 0:
-				boxes.get(i).setTile(TileType.DIRT);
+				boxes.get(0).setTile(TileType.DIRT);
 				break;
 			case 1:
-				boxes.get(i).setTile(TileType.GRASS);
+				boxes.get(1).setTile(TileType.GRASS);
 				break;
 			case 2:
-				boxes.get(i).setTile(TileType.STONE);
+				boxes.get(2).setTile(TileType.STONE);
+				break;
+			case 3:
+				boxes.get(3).setTile(TileType.WATER);
+				break;
+			case 4:
+				boxes.get(4).setTile(TileType.LAVA);
 				break;
 			default:
 				boxes.get(i).setTile(TileType.NULL);
 		}
+	}
+	
+	public TileType getActiveTile()
+	{
+		for(ToolbarBox box : boxes)
+		{
+			if(box.isActive())
+				return box.getTile();
+		}
+		return TileType.NULL;
 	}
 	
 	public List<ToolbarBox> getBoxes()
@@ -80,7 +117,7 @@ public class Toolbar
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(x, y, width, height);
 		g.setColor(Color.BLACK);
-		for(int i=0;i<10;i++)
+		for(int i=0;i<boxes.size();i++)
 		{
 			// Draw a rectangle at this :
 			// x value, but make sure it is spaced out by 2 pixels from each box and the sides of the bar.
@@ -88,11 +125,55 @@ public class Toolbar
 			// width, which is just a smaller version of the Tile's Width.
 			// height, which is just a smaller versio of the Tile'es Height.
 			// All of these combined space the boxes out
-			boxX = x + (i * 50) + 3;	// Needed to properly place the boxes
-			boxes.get(i).setX(boxX);
-			boxes.get(i).setY(boxY);
-			boxes.get(i).setWidth(boxWidth);
-			boxes.get(i).setHeight(boxHeight);
+			box1.setX(x + (i * 50) + 3);
+			box1.setY(y + 2);
+			box1.setWidth(Tile.TILEWIDTH - 10);
+			box1.setHeight(Tile.TILEHEIGHT - 10);
+			
+			box2.setX(x + (i * 50) + 3);
+			box2.setY(y + 2);
+			box2.setWidth(Tile.TILEWIDTH - 10);
+			box2.setHeight(Tile.TILEHEIGHT - 10);
+			
+			box3.setX(x + (i * 50) + 3);
+			box3.setY(y + 2);
+			box3.setWidth(Tile.TILEWIDTH - 10);
+			box3.setHeight(Tile.TILEHEIGHT - 10);
+			
+			box4.setX(x + (i * 50) + 3);
+			box4.setY(y + 2);
+			box4.setWidth(Tile.TILEWIDTH - 10);
+			box4.setHeight(Tile.TILEHEIGHT - 10);
+			
+			box5.setX(x + (i * 50) + 3);
+			box5.setY(y + 2);
+			box5.setWidth(Tile.TILEWIDTH - 10);
+			box5.setHeight(Tile.TILEHEIGHT - 10);
+			
+			box6.setX(x + (i * 50) + 3);
+			box6.setY(y + 2);
+			box6.setWidth(Tile.TILEWIDTH - 10);
+			box6.setHeight(Tile.TILEHEIGHT - 10);
+			
+			box7.setX(x + (i * 50) + 3);
+			box7.setY(y + 2);
+			box7.setWidth(Tile.TILEWIDTH - 10);
+			box7.setHeight(Tile.TILEHEIGHT - 10);
+			
+			box8.setX(x + (i * 50) + 3);
+			box8.setY(y + 2);
+			box8.setWidth(Tile.TILEWIDTH - 10);
+			box8.setHeight(Tile.TILEHEIGHT - 10);
+			
+			box9.setX(x + (i * 50) + 3);
+			box9.setY(y + 2);
+			box9.setWidth(Tile.TILEWIDTH - 10);
+			box9.setHeight(Tile.TILEHEIGHT - 10);
+			
+			box0.setX(x + (i * 50) + 3);
+			box0.setY(y + 2);
+			box0.setWidth(Tile.TILEWIDTH - 10);
+			box0.setHeight(Tile.TILEHEIGHT - 10);
 		}
 		
 		/* Example of how to set the TileType of a ToolbarBox */

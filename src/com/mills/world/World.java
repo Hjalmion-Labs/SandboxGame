@@ -69,6 +69,11 @@ public abstract class World {
 		return tileHandler.getTileAt(index);
 	}
 	
+	public int getSize()
+	{
+		return tileHandler.size();
+	}
+	
 	public int getWidth()
 	{
 		return WIDTH;

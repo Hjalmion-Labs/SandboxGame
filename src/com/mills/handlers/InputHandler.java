@@ -9,6 +9,8 @@ import java.util.List;
 import com.mills.main.Game;
 import com.mills.rendering.gui.toolbar.Toolbar;
 import com.mills.rendering.gui.toolbar.ToolbarBox;
+import com.mills.world.tiles.Tile;
+import com.mills.world.tiles.TileType;
 
 public class InputHandler implements KeyListener, MouseListener{
 	
@@ -47,8 +49,7 @@ public class InputHandler implements KeyListener, MouseListener{
 		}
 	}
 	
-//	public List<Key> keys = new ArrayList<Key>();
-	
+	private static TileType currentType;
 	
 	/* Arrow Keys */
 	public final Key UP = new Key();
@@ -82,8 +83,27 @@ public class InputHandler implements KeyListener, MouseListener{
 	public final Key KEY_K = new Key();
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		
+	public void mouseClicked(MouseEvent e)
+	{
+		int button = e.getButton();
+		if(button == MouseEvent.BUTTON1)
+		{
+			int x = e.getX() / Tile.TILEWIDTH;	// Puts the x as a x Tile coordinate
+			int y = e.getY() / Tile.TILEHEIGHT;	// Puts the y as a y Tile coordinate
+			
+			System.out.println("Clicked at (" + x + ", " + y + ")");
+			
+			for(int i = 0; i < Game.currentWorld.getSize(); i++)
+			{
+				Tile currentTile = ((WorldHandler)(Game.handlers.get(2))).getCurrentWorld().getTile(i);
+				if(currentTile.getTileX() == x && currentTile.getTileY() == y)
+				{
+					currentTile.setType(currentType);
+					System.out.println("Replaced " + currentTile.getType() + " with " + currentType);
+				}
+			}
+			
+		}
 	}
 
 	@Override
@@ -154,13 +174,14 @@ public class InputHandler implements KeyListener, MouseListener{
 			Toolbar bar = (Toolbar) list.get(0);
 			bar.getBox(0).setActive(true);
 */			
+			
 			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(9).setActive(true);	// This is so ugly, but works, so it stays ¯\_(ツ)_/¯
-				
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(9).getTile();
 		}
 		if(keyCode == KeyEvent.VK_1)
 		{
@@ -172,6 +193,7 @@ public class InputHandler implements KeyListener, MouseListener{
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(0).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(0).getTile();
 		}
 		if(keyCode == KeyEvent.VK_2)
 		{
@@ -183,6 +205,7 @@ public class InputHandler implements KeyListener, MouseListener{
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(1).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(1).getTile();
 		}
 		if(keyCode == KeyEvent.VK_3)
 		{
@@ -194,6 +217,7 @@ public class InputHandler implements KeyListener, MouseListener{
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(2).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(2).getTile();
 		}
 		if(keyCode == KeyEvent.VK_4)
 		{
@@ -205,6 +229,7 @@ public class InputHandler implements KeyListener, MouseListener{
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(3).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(3).getTile();
 		}
 		if(keyCode == KeyEvent.VK_5)
 		{
@@ -216,6 +241,7 @@ public class InputHandler implements KeyListener, MouseListener{
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(4).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(4).getTile();
 		}
 		if(keyCode == KeyEvent.VK_6)
 		{
@@ -227,6 +253,7 @@ public class InputHandler implements KeyListener, MouseListener{
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(5).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(5).getTile();
 		}
 		if(keyCode == KeyEvent.VK_7)
 		{
@@ -238,6 +265,7 @@ public class InputHandler implements KeyListener, MouseListener{
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(6).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(6).getTile();
 		}
 		if(keyCode == KeyEvent.VK_8)
 		{
@@ -249,6 +277,7 @@ public class InputHandler implements KeyListener, MouseListener{
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(7).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(7).getTile();
 		}
 		if(keyCode == KeyEvent.VK_9)
 		{
@@ -260,6 +289,7 @@ public class InputHandler implements KeyListener, MouseListener{
 			}
 			
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(8).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(8).getTile();
 		}
 		if(keyCode == KeyEvent.VK_ESCAPE)	// ESCAPE
 		{
