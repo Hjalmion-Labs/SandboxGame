@@ -12,6 +12,7 @@ public class ToolbarBox
 	private int width;
 	private int height;
 	private Color color;
+	private TileType tile;
 	
 	public ToolbarBox(int x, int y, int width, int height)
 	{

@@ -36,6 +36,32 @@ public class Toolbar
 		boxHeight = Tile.TILEWIDTH - 5;
 	}
 	
+	public void initialize()
+	{
+		for(int i = 0; i < boxes.size(); i++)
+		{
+			assignTile(i);
+		}
+	}
+	
+	private void assignTile(int i)
+	{
+		switch(i)
+		{
+			case 0:
+				boxes.get(i).setTile(TileType.DIRT);
+				break;
+			case 1:
+				boxes.get(i).setTile(TileType.GRASS);
+				break;
+			case 2:
+				boxes.get(i).setTile(TileType.STONE);
+				break;
+			default:
+				boxes.get(i).setTile(TileType.STONE);
+		}
+	}
+	
 	public void tick()
 	{
 		
