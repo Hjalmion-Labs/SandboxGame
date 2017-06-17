@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
@@ -49,6 +51,8 @@ public class Game extends Canvas implements Runnable{
 	private final EntityHandler entityHandler = new EntityHandler();
 	private final WorldHandler worldHandler = new WorldHandler();
 	private final GUIHandler guiHandler = new GUIHandler();
+	
+	public static final Map<Integer, Object> handlers = new HashMap<Integer, Object>();
 	
 	public Player player;
 	
@@ -100,6 +104,12 @@ public class Game extends Canvas implements Runnable{
 		/* Add Entities to the world's entity handler */
 		currentWorld.addEntity(player);
 		currentWorld.addEntity(zombie);
+		
+		/* Map the handlers to the integer keys, so we can access them in other classes */
+		handlers.put(0, inputHandler);
+		handlers.put(1, entityHandler);
+		handlers.put(2, worldHandler);
+		handlers.put(3, guiHandler);
 		
 		System.out.println("Set up the main window");
 

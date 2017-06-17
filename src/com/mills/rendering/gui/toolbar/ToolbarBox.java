@@ -13,6 +13,12 @@ public class ToolbarBox
 	private int height;
 	private Color color;
 	private TileType tile;
+	private boolean isActive;
+	
+	/**
+	 * Empty constructor. Must manually define the x, y, width, and height values for this object to work properly
+	 */
+	public ToolbarBox() {}
 	
 	public ToolbarBox(int x, int y, int width, int height)
 	{
@@ -24,7 +30,10 @@ public class ToolbarBox
 
 	public void render(java.awt.Graphics g)
 	{
-		g.setColor(Color.BLACK);
+		if(!isActive)
+			g.setColor(Color.BLACK);
+		else
+			g.setColor(Color.YELLOW);
 		g.drawRect(x, y, width, height);
 		if(color != null)
 		{
@@ -68,6 +77,16 @@ public class ToolbarBox
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	
+	public boolean isActive()
+	{
+		return isActive;
+	}
+	
+	public void setActive(boolean b)
+	{
+		isActive = b;
 	}
 	
 }

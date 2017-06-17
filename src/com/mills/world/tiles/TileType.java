@@ -4,6 +4,7 @@ import java.awt.Color;
 
 public enum TileType
 {
+	NULL("NULL", (byte)00, Color.WHITE),
 	DIRT("DIRT", (byte)01, new Color(139, 69, 19)),
 	STONE("STONE", (byte)02, Color.GRAY),
 	GRASS("GRASS", (byte)03, Color.GREEN.darker());

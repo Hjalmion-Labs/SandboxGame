@@ -1,5 +1,8 @@
 package com.mills.handlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mills.rendering.gui.toolbar.Toolbar;
 
 public class GUIHandler
@@ -14,6 +17,14 @@ public class GUIHandler
 	public void render(java.awt.Graphics g)
 	{
 		toolbar.render(g);
+	}
+	
+	public List<Object> getItems()
+	{
+		List<Object> items = new ArrayList<Object>();
+		items.add(toolbar);
+		
+		return items;
 	}
 	
 	public void tick()

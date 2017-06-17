@@ -16,7 +16,7 @@ public class Toolbar
 	private int width;
 	private int height;
 	
-	/** When using this value, make sure to use it in a loop like so: <br> boxX = x + (i * 50) + 2; */
+	/** When using this value, make sure to use it in a loop like so: <br> boxX = x + (i * 50) + 3; */
 	private int boxX;
 	private int boxY;
 	private int boxWidth;
@@ -28,18 +28,21 @@ public class Toolbar
 	{
 		x = 250;
 		y = Game.HEIGHT - 103;
-		width = 451;
+		width = 501;
 		height = 51;
 		
 		boxY = y + 2;
 		boxWidth = Tile.TILEWIDTH - 5;
 		boxHeight = Tile.TILEWIDTH - 5;
+		
+		initialize();
 	}
 	
-	public void initialize()
+	private void initialize()
 	{
-		for(int i = 0; i < boxes.size(); i++)
+		for(int i = 0; i < 10; i++)
 		{
+			boxes.add(i, new ToolbarBox());
 			assignTile(i);
 		}
 	}
@@ -58,8 +61,13 @@ public class Toolbar
 				boxes.get(i).setTile(TileType.STONE);
 				break;
 			default:
-				boxes.get(i).setTile(TileType.STONE);
+				boxes.get(i).setTile(TileType.NULL);
 		}
+	}
+	
+	public List<ToolbarBox> getBoxes()
+	{
+		return boxes;
 	}
 	
 	public void tick()
@@ -69,10 +77,10 @@ public class Toolbar
 	
 	public void render(java.awt.Graphics g)
 	{
-		g.setColor(Color.GRAY);
+		g.setColor(Color.DARK_GRAY);
 		g.fillRect(x, y, width, height);
 		g.setColor(Color.BLACK);
-		for(int i=0;i<9;i++)
+		for(int i=0;i<10;i++)
 		{
 			// Draw a rectangle at this :
 			// x value, but make sure it is spaced out by 2 pixels from each box and the sides of the bar.
@@ -80,8 +88,11 @@ public class Toolbar
 			// width, which is just a smaller version of the Tile's Width.
 			// height, which is just a smaller versio of the Tile'es Height.
 			// All of these combined space the boxes out
-			boxX = x + (i * 50) + 2;	// Needed to properly place the boxes
-			boxes.add(new ToolbarBox(boxX, boxY, boxWidth, boxHeight));	// Add a new ToolbarBox object at the specified location with the specified parameters
+			boxX = x + (i * 50) + 3;	// Needed to properly place the boxes
+			boxes.get(i).setX(boxX);
+			boxes.get(i).setY(boxY);
+			boxes.get(i).setWidth(boxWidth);
+			boxes.get(i).setHeight(boxHeight);
 		}
 		
 		/* Example of how to set the TileType of a ToolbarBox */
@@ -94,6 +105,11 @@ public class Toolbar
 		}
 	}
 
+	public ToolbarBox getBox(int index)
+	{
+		return boxes.get(index);
+	}
+	
 	public int getX() {
 		return x;
 	}
