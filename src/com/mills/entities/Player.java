@@ -39,14 +39,4 @@ public class Player extends Entity
 		setTileX(xTile);
 		setTileY(yTile);
 	}
-	
-	public void resetSpeed()
-	{
-		speed = originalSpeed;
-	}
-	
-	public void mulSpeed(int factor)
-	{
-		speed *= factor;
-	}
 }

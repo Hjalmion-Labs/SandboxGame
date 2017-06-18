@@ -26,6 +26,7 @@ public class ToolbarBox
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		tile = TileType.NULL;
 	}
 
 	public void render(java.awt.Graphics g)
@@ -42,8 +43,9 @@ public class ToolbarBox
 		}
 	}
 	
-	public void setTile(TileType tile)
+	public void setTile(TileType type)
 	{
+		tile = type;
 		color = tile.getColor();
 	}
 	

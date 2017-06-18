@@ -4,11 +4,12 @@ import java.awt.Graphics;
 
 import com.mills.world.World;
 
-public class GrassTile extends Tile
+public class LavaTile extends Tile
 {
 
-	public GrassTile(World world, int x, int y, boolean wasPlaced) {
-		super(TileType.GRASS, world, x, y, wasPlaced);
+	public LavaTile(World world, int x, int y, boolean wasPlaced)
+	{
+		super(TileType.LAVA, world, x, y, wasPlaced);
 		TILECOLOR = type.getColor();
 	}
 
@@ -21,8 +22,7 @@ public class GrassTile extends Tile
 	@Override
 	public void tick()
 	{
-		x = oX + world.xOffset;
-		y = oY + world.yOffset;
+		
 	}
-
+	
 }

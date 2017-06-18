@@ -20,7 +20,7 @@ public class DefaultWorld extends World
 	{
 		for(int i = 0; i < this.WIDTH; i++)
 			for(int j = 0; j < this.HEIGHT; j++)
-				this.tileHandler.addTile(new DirtTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT));
+				this.tileHandler.addTile(new DirtTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT, false));
 	}
 
 }

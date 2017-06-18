@@ -33,6 +33,11 @@ public abstract class World {
 	protected TileHandler tileHandler;
 	protected EntityHandler entityHandler;
 	
+	public void replaceTile(int index, Tile tile)
+	{
+		tileHandler.replaceTile(index, tile);
+	}
+	
 	public abstract void createWorld();
 	
 	public void destroyWorld()

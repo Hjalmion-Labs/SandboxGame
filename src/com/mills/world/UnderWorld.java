@@ -23,7 +23,7 @@ public class UnderWorld extends World {
 		{
 			for(int j = 0; j < HEIGHT; j++)
 			{
-				tileHandler.addTile(new StoneTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT));
+				tileHandler.addTile(new StoneTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT, false));
 				temp++;
 			}
 		}

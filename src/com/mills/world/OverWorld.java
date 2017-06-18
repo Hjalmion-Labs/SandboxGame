@@ -24,7 +24,7 @@ public class OverWorld extends World
 		{
 			for(int j = 0; j < HEIGHT; j++)
 			{
-				tileHandler.addTile(new GrassTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT));
+				tileHandler.addTile(new GrassTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT, false));
 				temp++;
 			}
 		}

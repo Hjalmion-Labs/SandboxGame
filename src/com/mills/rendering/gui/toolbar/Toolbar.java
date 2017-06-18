@@ -117,64 +117,65 @@ public class Toolbar
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(x, y, width, height);
 		g.setColor(Color.BLACK);
-		for(int i=0;i<boxes.size();i++)
-		{
-			// Draw a rectangle at this :
-			// x value, but make sure it is spaced out by 2 pixels from each box and the sides of the bar.
-			// y value, but make sure it is spaced out by 2 pixels from the top and bottom of the bar.
-			// width, which is just a smaller version of the Tile's Width.
-			// height, which is just a smaller versio of the Tile'es Height.
-			// All of these combined space the boxes out
-			box1.setX(x + (i * 50) + 3);
-			box1.setY(y + 2);
-			box1.setWidth(Tile.TILEWIDTH - 10);
-			box1.setHeight(Tile.TILEHEIGHT - 10);
-			
-			box2.setX(x + (i * 50) + 3);
-			box2.setY(y + 2);
-			box2.setWidth(Tile.TILEWIDTH - 10);
-			box2.setHeight(Tile.TILEHEIGHT - 10);
-			
-			box3.setX(x + (i * 50) + 3);
-			box3.setY(y + 2);
-			box3.setWidth(Tile.TILEWIDTH - 10);
-			box3.setHeight(Tile.TILEHEIGHT - 10);
-			
-			box4.setX(x + (i * 50) + 3);
-			box4.setY(y + 2);
-			box4.setWidth(Tile.TILEWIDTH - 10);
-			box4.setHeight(Tile.TILEHEIGHT - 10);
-			
-			box5.setX(x + (i * 50) + 3);
-			box5.setY(y + 2);
-			box5.setWidth(Tile.TILEWIDTH - 10);
-			box5.setHeight(Tile.TILEHEIGHT - 10);
-			
-			box6.setX(x + (i * 50) + 3);
-			box6.setY(y + 2);
-			box6.setWidth(Tile.TILEWIDTH - 10);
-			box6.setHeight(Tile.TILEHEIGHT - 10);
-			
-			box7.setX(x + (i * 50) + 3);
-			box7.setY(y + 2);
-			box7.setWidth(Tile.TILEWIDTH - 10);
-			box7.setHeight(Tile.TILEHEIGHT - 10);
-			
-			box8.setX(x + (i * 50) + 3);
-			box8.setY(y + 2);
-			box8.setWidth(Tile.TILEWIDTH - 10);
-			box8.setHeight(Tile.TILEHEIGHT - 10);
-			
-			box9.setX(x + (i * 50) + 3);
-			box9.setY(y + 2);
-			box9.setWidth(Tile.TILEWIDTH - 10);
-			box9.setHeight(Tile.TILEHEIGHT - 10);
-			
-			box0.setX(x + (i * 50) + 3);
-			box0.setY(y + 2);
-			box0.setWidth(Tile.TILEWIDTH - 10);
-			box0.setHeight(Tile.TILEHEIGHT - 10);
-		}
+		
+		// Draw a rectangle at this :
+		// x value, but make sure it is spaced out by 2 pixels from each box and the sides of the bar.
+		// y value, but make sure it is spaced out by 2 pixels from the top and bottom of the bar.
+		// width, which is just a smaller version of the Tile's Width.
+		// height, which is just a smaller versio of the Tile'es Height.
+		// All of these combined space the boxes out
+		
+		int i = 0;
+		
+		box1.setX(x + (i++ * 50) + 3);
+		box1.setY(y + 2);
+		box1.setWidth(Tile.TILEWIDTH - 10);
+		box1.setHeight(Tile.TILEHEIGHT - 10);
+		
+		box2.setX(x + (i++ * 50) + 3);
+		box2.setY(y + 2);
+		box2.setWidth(Tile.TILEWIDTH - 10);
+		box2.setHeight(Tile.TILEHEIGHT - 10);
+		
+		box3.setX(x + (i++ * 50) + 3);
+		box3.setY(y + 2);
+		box3.setWidth(Tile.TILEWIDTH - 10);
+		box3.setHeight(Tile.TILEHEIGHT - 10);
+		
+		box4.setX(x + (i++ * 50) + 3);
+		box4.setY(y + 2);
+		box4.setWidth(Tile.TILEWIDTH - 10);
+		box4.setHeight(Tile.TILEHEIGHT - 10);
+		
+		box5.setX(x + (i++ * 50) + 3);
+		box5.setY(y + 2);
+		box5.setWidth(Tile.TILEWIDTH - 10);
+		box5.setHeight(Tile.TILEHEIGHT - 10);
+		
+		box6.setX(x + (i++ * 50) + 3);
+		box6.setY(y + 2);
+		box6.setWidth(Tile.TILEWIDTH - 10);
+		box6.setHeight(Tile.TILEHEIGHT - 10);
+		
+		box7.setX(x + (i++ * 50) + 3);
+		box7.setY(y + 2);
+		box7.setWidth(Tile.TILEWIDTH - 10);
+		box7.setHeight(Tile.TILEHEIGHT - 10);
+		
+		box8.setX(x + (i++ * 50) + 3);
+		box8.setY(y + 2);
+		box8.setWidth(Tile.TILEWIDTH - 10);
+		box8.setHeight(Tile.TILEHEIGHT - 10);
+		
+		box9.setX(x + (i++ * 50) + 3);
+		box9.setY(y + 2);
+		box9.setWidth(Tile.TILEWIDTH - 10);
+		box9.setHeight(Tile.TILEHEIGHT - 10);
+		
+		box0.setX(x + (i++ * 50) + 3);
+		box0.setY(y + 2);
+		box0.setWidth(Tile.TILEWIDTH - 10);
+		box0.setHeight(Tile.TILEHEIGHT - 10);
 		
 		/* Example of how to set the TileType of a ToolbarBox */
 //		ToolbarBox box1 = boxes.get(0);
