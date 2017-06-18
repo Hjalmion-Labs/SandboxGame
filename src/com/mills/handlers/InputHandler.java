@@ -18,6 +18,11 @@ import com.mills.world.tiles.Tile;
 import com.mills.world.tiles.TileType;
 import com.mills.world.tiles.WaterTile;
 
+/**
+ * 
+ * @author Nick Mills
+ *
+ */
 public class InputHandler implements KeyListener, MouseListener{
 	
 	protected long last = System.nanoTime();

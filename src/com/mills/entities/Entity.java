@@ -159,7 +159,7 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * 
+	 * Makes sure that this Entity does not accidentally (or purposely) get out of the world. Should be called every {@link Entity#tick()}
 	 */
 	public void keepInBounds()
 	{

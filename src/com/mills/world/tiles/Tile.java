@@ -27,13 +27,16 @@ public abstract class Tile {
 		{
 			this.oX = x * TILEWIDTH;
 			this.oY = y * TILEHEIGHT;
+			tileX = x;
+			tileY = y;
 		} else
 		{
 			this.oX = x;
 			this.oY = y;
+			tileX = x / TILEWIDTH;
+			tileY = y / TILEHEIGHT;
 		}
-		tileX = x / TILEWIDTH;
-		tileY = y / TILEHEIGHT;
+		
 	}
 
 	public boolean contains(int x, int y)
