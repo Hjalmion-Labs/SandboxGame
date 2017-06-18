@@ -33,6 +33,11 @@ public abstract class World {
 	protected TileHandler tileHandler;
 	protected EntityHandler entityHandler;
 	
+	public void replaceTile(int index, Tile tile)
+	{
+		tileHandler.replaceTile(index, tile);
+	}
+	
 	public abstract void createWorld();
 	
 	public void destroyWorld()
@@ -62,6 +67,16 @@ public abstract class World {
 	public void addEntity(Entity ent)
 	{
 		entityHandler.addEntity(ent);
+	}
+	
+	public Tile getTile(int index)
+	{
+		return tileHandler.getTileAt(index);
+	}
+	
+	public int getSize()
+	{
+		return tileHandler.size();
 	}
 	
 	public int getWidth()

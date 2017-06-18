@@ -25,6 +25,16 @@ public class TileHandler {
 		}
 	}
 	
+	public Tile getTileAt(int index)
+	{
+		return tiles.get(index);
+	}
+	
+	public void replaceTile(int index, Tile tile)
+	{
+		tiles.set(index, tile);
+	}
+	
 	public int size()
 	{
 		return tiles.size();

@@ -8,11 +8,15 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
 import com.mills.entities.Player;
+import com.mills.entities.Zombie;
 import com.mills.handlers.EntityHandler;
+import com.mills.handlers.GUIHandler;
 import com.mills.handlers.InputHandler;
 import com.mills.handlers.WorldHandler;
 import com.mills.rendering.Display;
@@ -33,8 +37,6 @@ public class Game extends Canvas implements Runnable{
 	public static final int LINUXWIDTH = 700;
 	public static final int LINUXHEIGHT = 400;
 
-	private int tickCount = 0;
-	
 	public static final String osName = System.getProperty("os.name");
 
 	private static final BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -46,8 +48,11 @@ public class Game extends Canvas implements Runnable{
 	private final InputHandler inputHandler = new InputHandler(this);
 	private final EntityHandler entityHandler = new EntityHandler();
 	private final WorldHandler worldHandler = new WorldHandler();
+	private final GUIHandler guiHandler = new GUIHandler();
 	
-	public Player player;
+	public static final Map<Integer, Object> handlers = new HashMap<Integer, Object>();
+	
+	public static Player player;
 	
 	public synchronized void start()
 	{
@@ -89,9 +94,20 @@ public class Game extends Canvas implements Runnable{
 		
 		/* Instantiate the Player */
 		player = new Player("Player1", currentWorld, WIDTH / 2, HEIGHT / 2, 5);
+		player.setPos(currentWorld.getTile(currentWorld.getWidth() / 2), currentWorld.getTile(currentWorld.getHeight() / 2));
+		
+		/* Create a test Zombie */
+		Zombie zombie = new Zombie("George", currentWorld, 50, 50);
 		
 		/* Add Entities to the world's entity handler */
 		currentWorld.addEntity(player);
+		currentWorld.addEntity(zombie);
+		
+		/* Map the handlers to the integer keys, so we can access them in other classes */
+		handlers.put(0, inputHandler);
+		handlers.put(1, entityHandler);
+		handlers.put(2, worldHandler);
+		handlers.put(3, guiHandler);
 		
 		System.out.println("Set up the main window");
 
@@ -165,7 +181,6 @@ public class Game extends Canvas implements Runnable{
 				System.out.println(ticks + " ticks, " + frames + " frames");
 				System.out.println("Current World: " + worldHandler.getCurrentWorld());
 				System.out.println("X: " + (player.getX() / Tile.TILEWIDTH) + "\nY: " + (player.getY() / Tile.TILEHEIGHT));
-				
 
 				frames = 0;
 				ticks = 0;
@@ -175,13 +190,11 @@ public class Game extends Canvas implements Runnable{
 	
 	public void tick()
 	{
-		tickCount++;
-		
 		worldHandler.tick();
 		
 		if(inputHandler.UP.isPressed())
 		{
-			if(currentWorld.yOffset < 0 && player.getTileY() <= 4)	// If the Player is in the World (not in the void) and within the 5 Tile "square", move the World
+			if(currentWorld.yOffset < 0 && player.getTileY() <= 4)	// If the Player is in the World (not in the void) and within the 4 Tile "square", move the World
 				currentWorld.yOffset += player.getSpeed();
 			else													// Otherwise just move the Player
 				player.setY(player.getY() - player.getSpeed());
@@ -190,23 +203,25 @@ public class Game extends Canvas implements Runnable{
 		{
 			if(currentWorld.yOffset < currentWorld.getHeight() && player.getTileY() >= 4)
 				currentWorld.yOffset -= player.getSpeed();
-			else if(player.getTileY() <= 4)						// If Player is less than or at 5 tiles away from the edge, move the Player
+			else if(player.getTileY() <= 4)						// If Player is less than or at 4 tiles away from the edge, move the Player
 				player.setY(player.getY() + player.getSpeed());	
 		}
 		if(inputHandler.LEFT.isPressed())
 		{
-			if(currentWorld.xOffset < 0 && player.getTileX() <= 4)	// If the Player is in the World (not in the void) and within the 5 Tile "square". move the World
+			if(currentWorld.xOffset < 0 && player.getTileX() <= 4)	// If the Player is in the World (not in the void) and within the 4 Tile "square". move the World
 				currentWorld.xOffset += player.getSpeed();
 			else
 				player.setX(player.getX() - player.getSpeed());		// Otherwise just move the Player
 		}
 		if(inputHandler.RIGHT.isPressed())
 		{
-			if(currentWorld.xOffset < currentWorld.getWidth() && player.getTileX() >= 4)	// If the Player is less than the width of the World and outside the 5 Tile "square", move the World
+			if(currentWorld.xOffset < currentWorld.getWidth() && player.getTileX() >= 4)	// If the Player is less than the width of the World and outside the 4 Tile "square", move the World
 				currentWorld.xOffset -= player.getSpeed();
-			else if(player.getTileX() <= 4)													// If the player is less than or at 5 Tiles away from the edge, move the Player
+			else if(player.getTileX() <= 4)													// If the player is less than or at 4 Tiles away from the edge, move the Player
 				player.setX(player.getX() + player.getSpeed());
 		}
+		
+		guiHandler.tick();
 			
 	}
 	
@@ -231,7 +246,7 @@ public class Game extends Canvas implements Runnable{
 		entityHandler.render(g);
 		/* Turn AntiAlias off so it doesn't affect any other objects being drawn */
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-		/*  */
+		guiHandler.render(g);
 		/* END DRAWING */
 		
 		g.dispose();
