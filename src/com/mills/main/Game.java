@@ -46,21 +46,31 @@ public class Game extends Canvas implements Runnable
 	/* The name of the OS running the Game.  */
 	public static final String osName = System.getProperty("os.name");
 
+	/* This image is the background of the game */
 	private static final BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	
+	/* The window that the Game lives in. Instantiated by Display.create(...) */
 	private static JFrame frame;
 
+	/* The current World that we are in */
 	public static World currentWorld;
 	
+	/* Handles all of the input for the Game */
 	private final InputHandler inputHandler = new InputHandler(this);
-	private final EntityHandler entityHandler = new EntityHandler();
+	/* Handles all of the World for the Game */
 	private final WorldHandler worldHandler = new WorldHandler();
+	/* Handles any UI elements for the Game */
 	private final GUIHandler guiHandler = new GUIHandler();
 	
+	/* Allows other classes to easily reference the handlers of the Game */
 	public static final Map<Integer, Object> handlers = new HashMap<Integer, Object>();
 	
+	/* The Player for the game */
 	public static Player player;
 	
+	/**
+	 * Starts the game
+	 */
 	public synchronized void start()
 	{
 		if(isRunning) return;
@@ -72,6 +82,9 @@ public class Game extends Canvas implements Runnable
         	thread.start();
 	}
 
+	/**
+	 * Stops the game
+	 */
 	public synchronized void stop()
 	{
 		if(!isRunning) return;
@@ -87,6 +100,9 @@ public class Game extends Canvas implements Runnable
 		}
 	}
 
+	/**
+	 * Helper method that instantiates anything that is needed and wasn't instantiated already
+	 */
 	private void init()
 	{
 		System.out.println("Initialize..");
@@ -112,9 +128,8 @@ public class Game extends Canvas implements Runnable
 		
 		/* Map the handlers to the integer keys, so we can access them in other classes */
 		handlers.put(0, inputHandler);
-		handlers.put(1, entityHandler);
-		handlers.put(2, worldHandler);
-		handlers.put(3, guiHandler);
+		handlers.put(1, worldHandler);
+		handlers.put(2, guiHandler);
 		
 		System.out.println("Set up the main window");
 
@@ -195,6 +210,9 @@ public class Game extends Canvas implements Runnable
 		}
 	}
 	
+	/**
+	 * Runs usually about 60 times a second. All updates go here
+	 */
 	public void tick()
 	{
 		worldHandler.tick();
@@ -232,6 +250,9 @@ public class Game extends Canvas implements Runnable
 			
 	}
 	
+	/**
+	 * Draws everything to the screen
+	 */
 	public void render()
 	{		
 		BufferStrategy bs = getBufferStrategy();
@@ -250,7 +271,6 @@ public class Game extends Canvas implements Runnable
 		worldHandler.render(g);
 		/* Set Rendering Hints so we can draw the player nice and smooth */
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		entityHandler.render(g);
 		/* Turn AntiAlias off so it doesn't affect any other objects being drawn */
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 		guiHandler.render(g);
