@@ -25,18 +25,25 @@ import com.mills.world.UnderWorld;
 import com.mills.world.World;
 import com.mills.world.tiles.Tile;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable
+{
+	private static final long serialVersionUID = 8125218200279626336L;	// Needed for Runnable
 
-	private static final long serialVersionUID = 8125218200279626336L;
-
+	/* The Thread to run this Game with */
 	private Thread thread;
+	/* Whether or not the Game is running */
 	private static boolean isRunning;
 
+	/* Width of the screen, in pixels */
 	public static final int WIDTH = 1080;
+	/* Height of the screen, in pixels. The height is calculated by using the Width and generating a 16:9 aspect ratio */
 	public static final int HEIGHT = WIDTH / 16 * 9;
+	/* Width of the screen, in pixels, if the OS running the Game is Linux / Unix based */
 	public static final int LINUXWIDTH = 700;
+	/* Height of the screen, in pixels, if the OS running the Game is Linux / Unix based. */
 	public static final int LINUXHEIGHT = 400;
 
+	/* The name of the OS running the Game.  */
 	public static final String osName = System.getProperty("os.name");
 
 	private static final BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);

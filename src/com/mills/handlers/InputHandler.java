@@ -19,20 +19,26 @@ import com.mills.world.tiles.TileType;
 import com.mills.world.tiles.WaterTile;
 
 /**
- * 
+ * Handles all of the input that the game can receive from the mouse and keyboard.
  * @author Nick Mills
- *
  */
 public class InputHandler implements KeyListener, MouseListener{
 	
-	protected long last = System.nanoTime();
-	
+	/**
+	 * Instantiates the InputHandler and adds this to the {@link Game} as the {@link KeyListener} and {@link MouseListener}
+	 * @param game - Game to add this to
+	 */
 	public InputHandler(Game game)
 	{
 		game.addKeyListener(this);
 		game.addMouseListener(this);
 	}
 	
+	/**
+	 * Class that represents a Key on the keyboard.
+	 * @author Nick Mills
+	 *
+	 */
 	public class Key
 	{
 		private boolean pressed = false;
@@ -40,16 +46,29 @@ public class InputHandler implements KeyListener, MouseListener{
 		
 		public int keyCode;
 		
+		/**
+		 * <strong>Getter</strong><br>
+		 * Gets the number of times this Key was pressed
+		 * @return an int of how many times this Key has been pressed
+		 */
 		public int getNumTimesPressed()
 		{
 			return numTimesPressed;
 		}
 		
+		/**
+		 * Returns true if {@link Key#pressed} is true, false otherwise
+		 * @return whether or not this Key is pressed
+		 */
 		public boolean isPressed()
 		{
 			return pressed;
 		}
 		
+		/**
+		 * Set this Key to the supplied state (true or false), and increment {@link Key#numTimesPressed}
+		 * @param isPressed - state that this Key should be in
+		 */
 		public void toggle(boolean isPressed)
 		{
 			pressed = isPressed;
@@ -197,12 +216,15 @@ public class InputHandler implements KeyListener, MouseListener{
 		{
 			KEY_1.toggle(isPressed);
 			
+			/* Loop through all of the ToolbarBoxes and set each box's state to inactive*/
 			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
+			/* Set the ToolbarBox at the first position to active */
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(0).setActive(true);
+			/* Set the currentType equal to the Tile that the ToolbarBox represents */
 			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(0).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
