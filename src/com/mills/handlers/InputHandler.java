@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mills.main.Game;
@@ -22,8 +23,11 @@ public class InputHandler implements KeyListener, MouseListener{
 	
 	protected long last = System.nanoTime();
 	
+	private Game game;
+	
 	public InputHandler(Game game)
 	{
+		this.game = game;
 		game.addKeyListener(this);
 		game.addMouseListener(this);
 	}
@@ -94,7 +98,8 @@ public class InputHandler implements KeyListener, MouseListener{
 		int button = e.getButton();
 		if(button == MouseEvent.BUTTON1)
 		{
-			int x = e.getX() / Tile.TILEWIDTH;	// Puts the x as a x Tile coordinate
+			//TODO: Have to take into consideration any offset of the world
+			int x = e.getX() / Tile.TILEWIDTH + (((WorldHandler)(Game.handlers.get(2))).getCurrentWorld().xOffset / Tile.TILEWIDTH);	// Puts the x as a x Tile coordinate
 			int y = e.getY() / Tile.TILEHEIGHT;	// Puts the y as a y Tile coordinate
 			
 			System.out.println("Clicked at (" + x + ", " + y + ")");
@@ -106,14 +111,15 @@ public class InputHandler implements KeyListener, MouseListener{
 				if(currentTile.getTileX() == x && currentTile.getTileY() == y)
 				{
 					System.out.println("Replace " + currentTile.getType() + " with " + currentType);
-					int tileX = currentTile.getX();
-					int tileY = currentTile.getY();
+					int tileX = currentTile.getTileX();
+					int tileY = currentTile.getTileY();
 					if(currentType != null)
 					{
 						switch(currentType)
 						{
 							case DIRT:
 								currentWorld.replaceTile(i, new DirtTile(currentWorld, tileX, tileY, true));
+								System.out.println("Placed a DIRT tile at (" + tileX + ", " + tileY + ")");
 								break;
 							case GRASS:
 								currentWorld.replaceTile(i, new GrassTile(currentWorld, tileX, tileY, true));
@@ -187,6 +193,16 @@ public class InputHandler implements KeyListener, MouseListener{
 		if(keyCode == KeyEvent.VK_D)	// RIGHT
 		{
 			RIGHT.toggle(isPressed);
+		}
+		if(keyCode == KeyEvent.VK_K)
+		{
+			if(isPressed)
+			{
+				FileHandler handler = (FileHandler) Game.handlers.get(4);
+				List<Object> testWorld = new ArrayList<Object>();
+				testWorld.add((WorldHandler) Game.handlers.get(2));
+				handler.saveGame(testWorld, game);
+			}
 		}
 		if(keyCode == KeyEvent.VK_1)
 		{

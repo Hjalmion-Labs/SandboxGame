@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import com.mills.entities.Player;
 import com.mills.entities.Zombie;
 import com.mills.handlers.EntityHandler;
+import com.mills.handlers.FileHandler;
 import com.mills.handlers.GUIHandler;
 import com.mills.handlers.InputHandler;
 import com.mills.handlers.WorldHandler;
@@ -49,6 +50,7 @@ public class Game extends Canvas implements Runnable{
 	private final EntityHandler entityHandler = new EntityHandler();
 	private final WorldHandler worldHandler = new WorldHandler();
 	private final GUIHandler guiHandler = new GUIHandler();
+	private final FileHandler fileHandler = new FileHandler();
 	
 	public static final Map<Integer, Object> handlers = new HashMap<Integer, Object>();
 	
@@ -108,6 +110,7 @@ public class Game extends Canvas implements Runnable{
 		handlers.put(1, entityHandler);
 		handlers.put(2, worldHandler);
 		handlers.put(3, guiHandler);
+		handlers.put(4, fileHandler);
 		
 		System.out.println("Set up the main window");
 
