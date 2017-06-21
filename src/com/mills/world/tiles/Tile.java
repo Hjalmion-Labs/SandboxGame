@@ -23,9 +23,9 @@ public abstract class Tile {
 	{
 		this.type = type;
 		this.world = world;
-		if(wasPlaced)
+		if(wasPlaced)	// User placed this Tile
 		{
-			if(world.xOffset == 0 && world.yOffset == 0)
+			if(world.xOffset == 0 && world.yOffset == 0)	// Offsets are zero
 			{
 				if(x == 0)
 				{
