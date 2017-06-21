@@ -23,17 +23,35 @@ public abstract class Tile {
 	{
 		this.type = type;
 		this.world = world;
-		if(wasPlaced)
+		if(wasPlaced)	// User placed this Tile
 		{
-			this.oX = x * TILEWIDTH;
-			this.oY = y * TILEHEIGHT;
-		} else
+			if(world.xOffset == 0 && world.yOffset == 0)	// Offsets are zero
+			{
+				if(x == 0)
+				{
+					this.oX = 0;
+				}
+				if(y == 0)
+				{
+					this.oY = 0;
+				}
+				if(x != 0 && y != 0)
+				{
+					this.oX = x * TILEWIDTH;
+					this.oY = y * TILEHEIGHT;
+				}
+			} else	// offsets are non-zero
+			{
+				this.tileX = x;
+				this.tileY = y;
+			}
+		} else	// Not placed
 		{
 			this.oX = x;
 			this.oY = y;
+			tileX = x / TILEWIDTH;
+			tileY = y / TILEHEIGHT;
 		}
-		tileX = x / TILEWIDTH;
-		tileY = y / TILEHEIGHT;
 	}
 
 	public boolean contains(int x, int y)
