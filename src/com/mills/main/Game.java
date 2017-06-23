@@ -23,7 +23,6 @@ import com.mills.rendering.Display;
 import com.mills.world.OverWorld;
 import com.mills.world.UnderWorld;
 import com.mills.world.World;
-import com.mills.world.tiles.Tile;
 
 public class Game extends Canvas implements Runnable{
 
@@ -94,10 +93,10 @@ public class Game extends Canvas implements Runnable{
 		
 		/* Instantiate the Player */
 		player = new Player("Player1", currentWorld, WIDTH / 2, HEIGHT / 2, 5);
-		player.setPos(currentWorld.getTile(currentWorld.getWidth() / 2), currentWorld.getTile(currentWorld.getHeight() / 2));
 		
 		/* Create a test Zombie */
 		Zombie zombie = new Zombie("George", currentWorld, 50, 50);
+		zombie.setPos(currentWorld.getTile(2 * currentWorld.getWidth() + 1));
 		
 		/* Add Entities to the world's entity handler */
 		currentWorld.addEntity(player);
