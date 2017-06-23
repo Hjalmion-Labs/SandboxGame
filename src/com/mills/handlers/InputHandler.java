@@ -39,19 +39,8 @@ public class InputHandler implements KeyListener, MouseListener
 	public class Key
 	{
 		private boolean pressed = false;
-		private int numTimesPressed = 0;
 		
 		public int keyCode;
-		
-		/**
-		 * <strong>Getter</strong><br>
-		 * Gets the number of times this Key was pressed
-		 * @return an int of how many times this Key has been pressed
-		 */
-		public int getNumTimesPressed()
-		{
-			return numTimesPressed;
-		}
 		
 		/**
 		 * Returns true if {@link Key#pressed} is true, false otherwise
@@ -69,7 +58,6 @@ public class InputHandler implements KeyListener, MouseListener
 		public void toggle(boolean isPressed)
 		{
 			pressed = isPressed;
-			if(isPressed) numTimesPressed++;
 		}
 	}
 	
@@ -191,7 +179,7 @@ public class InputHandler implements KeyListener, MouseListener
 	@Override
 	public void keyTyped(KeyEvent e)
 	{
-		toggleKey(e.getKeyCode(), false);
+//		toggleKey(e.getKeyCode(), false);
 	}
 	
 	public void toggleKey(int keyCode, boolean isPressed)
@@ -236,7 +224,10 @@ public class InputHandler implements KeyListener, MouseListener
 			/* Set the currentType equal to the Tile that the ToolbarBox represents */
 			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(0).getTile();
 			if(isPressed)	// If we pressed (not released) the key
+			{
 				System.out.println(currentType);
+				System.out.println(((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes().size());
+			}
 		}
 		if(keyCode == KeyEvent.VK_2)
 		{
