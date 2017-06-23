@@ -4,9 +4,13 @@ Looking to be a top-down 2D Factory Game or Sandbox game.
 
 # How to play
 w - move up
+
 a - move left
+
 s - move down
+
 d - move right
+
 
 left click - place tile at cursor
 
