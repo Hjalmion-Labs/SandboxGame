@@ -178,7 +178,7 @@ public class Game extends Canvas implements Runnable{
 				lastTimer += 1000;
 				System.out.println(ticks + " ticks, " + frames + " frames");
 				System.out.println("Current World: " + worldHandler.getCurrentWorld());
-				System.out.println("X: " + (player.getX() / Tile.TILEWIDTH) + "\nY: " + (player.getY() / Tile.TILEHEIGHT));
+				System.out.println("X: " + player.getTileX() + "\nY: " + player.getTileY());
 
 				frames = 0;
 				ticks = 0;
