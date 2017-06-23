@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,26 +20,21 @@ public class FileHandler
 	private ObjectInputStream input;
 	private FileInputStream inputStream;
 	
-	public ArrayList<Object> prepareGame(Game game, GUIHandler gui, InputHandler ih, WorldHandler wh)
+	private static List<Object> save = new ArrayList<Object>();
+	
+	public static List<Object> prepareGame(GUIHandler gui, InputHandler ih, WorldHandler wh)
 	{
-		
-		return new ArrayList<Object>();
+		save.add(gui);
+		save.add(ih);
+		save.add(wh);
+		return save;
 	}
 	
-	public void saveGame(List<Object> toSave, Game game)
+	public void saveGame(Game game)
 	{
 		try
 		{	
-			File dir = new File(game.getClass().getClassLoader().getResource(File.separator).getPath());
-			
-			if(!dir.exists())
-			{
-				dir.mkdirs();
-			}
-			
-			System.out.println(dir.getAbsolutePath());
-			
-			file = new File(dir, File.separator + "worlds" + File.separator + "test.world");
+			File file = new File("D:\\Programming\\Java\\workspace\\CompSciFinal\\test.world");
 			
 			if(!file.exists())
 			{
@@ -49,7 +45,7 @@ public class FileHandler
 			outStream = new FileOutputStream(file);
 			output = new ObjectOutputStream(outStream);
 			
-			output.writeObject(toSave);
+			output.writeObject(save);
 			
 			System.out.println("Object written to " + file.getName() + "!");
 			

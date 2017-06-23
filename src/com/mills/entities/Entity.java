@@ -1,5 +1,7 @@
 package com.mills.entities;
 
+import java.awt.Dimension;
+
 import com.mills.world.World;
 import com.mills.world.tiles.Tile;
 
@@ -8,6 +10,8 @@ public abstract class Entity {
 	protected String name;
 	protected int x;
 	protected int y;
+	protected int oX;
+	protected int oY;
 	protected int tileX;
 	protected int tileY;
 	protected int speed;
@@ -22,6 +26,10 @@ public abstract class Entity {
 		this.world = world;
 		this.x = x;
 		this.y = y;
+		this.oX = this.x;
+		this.oY = this.y;
+		this.tileX = x * Tile.TILEWIDTH;
+		this.tileY = y * Tile.TILEHEIGHT;
 	}
 	
 	public abstract void tick();
@@ -32,9 +40,34 @@ public abstract class Entity {
 		return name;
 	}
 	
-	public void setPos(Tile x, Tile y)
+	public void detectCollision(Entity ent1, Entity ent2)
+	{
+		Dimension center1 = new Dimension(ent1.getX() + (ent1.getWidth() / 2), ent1.getY() + (ent1.getHeight() / 2));
+		Dimension center2 = new Dimension(ent2.getX() + (ent2.getWidth() / 2), ent2.getY() + (ent2.getHeight() / 2));
+		
+//		center1.
+	}
+	
+	public int center()
 	{
 		
+		return 0;
+	}
+	
+	public void setPos(Tile tile)
+	{
+		tileX = tile.getTileX();
+		tileY = tile.getTileY();
+	}
+	
+	public int getWidth()
+	{
+		return width;
+	}
+	
+	public int getHeight()
+	{
+		return height;
 	}
 	
 	public void setX(int x)

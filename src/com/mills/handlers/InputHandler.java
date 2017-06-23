@@ -28,7 +28,7 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		game.addMouseListener(this);
 	}
 	
-	public class Key
+	public class Key implements Serializable
 	{
 		private boolean pressed = false;
 		private int numTimesPressed = 0;
@@ -94,8 +94,8 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		int button = e.getButton();
 		if(button == MouseEvent.BUTTON1)
 		{
-			int x = e.getX() / Tile.TILEWIDTH - (((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().xOffset / Tile.TILEWIDTH);	// Puts the x as a x Tile coordinate with consideration to any offset
-			int y = e.getY() / Tile.TILEHEIGHT - (((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().yOffset / Tile.TILEHEIGHT) ;	// Puts the y as a y Tile coordinate with consideration to any offset
+			int x = e.getX() / Tile.TILEWIDTH - (int)Math.ceil((((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().xOffset / Tile.TILEWIDTH));	// Puts the x as a x Tile coordinate with consideration to any offset
+			int y = e.getY() / Tile.TILEHEIGHT - (int)Math.ceil((((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().yOffset / Tile.TILEHEIGHT));	// Puts the y as a y Tile coordinate with consideration to any offset
 			
 			System.out.println("Clicked at (" + x + ", " + y + ")");
 			
@@ -195,10 +195,11 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			if(isPressed)
 			{
+				FileHandler.prepareGame((GUIHandler)Game.handlers.get("gui"), this, (WorldHandler)Game.handlers.get("world"));
 				FileHandler handler = (FileHandler) Game.handlers.get("file");
 				List<Object> testWorld = new ArrayList<Object>();
 				testWorld.add((WorldHandler) Game.handlers.get(1));
-				handler.saveGame(testWorld, game);
+				handler.saveGame(game);
 			}
 		}
 		if(keyCode == KeyEvent.VK_1)
