@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import javax.swing.JFrame;
 
 import com.mills.entities.Player;
 import com.mills.entities.Zombie;
-import com.mills.handlers.EntityHandler;
 import com.mills.handlers.FileHandler;
 import com.mills.handlers.GUIHandler;
 import com.mills.handlers.InputHandler;
@@ -53,7 +50,7 @@ public class Game extends Canvas implements Runnable{
 	private final GUIHandler guiHandler = new GUIHandler();
 	private final FileHandler fileHandler = new FileHandler();
 	
-	public static final Map<Integer, Object> handlers = new HashMap<Integer, Object>();
+	public static final Map<String, Object> handlers = new HashMap<String, Object>();
 	
 	public static Player player;
 	
@@ -106,11 +103,11 @@ public class Game extends Canvas implements Runnable{
 		currentWorld.addEntity(player);
 		currentWorld.addEntity(zombie);
 		
-		/* Map the handlers to the integer keys, so we can access them in other classes */
-		handlers.put(0, inputHandler);
-		handlers.put(1, worldHandler);
-		handlers.put(2, guiHandler);
-		handlers.put(3, fileHandler);
+		/* Map the handlers to the string keys, so we can access them in other classes */
+		handlers.put("input", inputHandler);
+		handlers.put("world", worldHandler);
+		handlers.put("gui", guiHandler);
+		handlers.put("file", fileHandler);
 		
 		System.out.println("Set up the main window");
 
