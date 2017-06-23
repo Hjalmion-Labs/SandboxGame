@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
 
 import com.mills.main.Game;
 import com.mills.rendering.gui.toolbar.Toolbar;

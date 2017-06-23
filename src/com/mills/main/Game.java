@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import javax.swing.JFrame;
 
 import com.mills.entities.Player;
 import com.mills.entities.Zombie;
-import com.mills.handlers.EntityHandler;
 import com.mills.handlers.FileHandler;
 import com.mills.handlers.GUIHandler;
 import com.mills.handlers.InputHandler;
