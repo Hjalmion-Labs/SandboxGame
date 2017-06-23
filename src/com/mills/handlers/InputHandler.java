@@ -18,10 +18,7 @@ import com.mills.world.tiles.TileType;
  * @param game - Game to add this to
  */
 public class InputHandler implements KeyListener, MouseListener
-{
-	
-	protected long last = System.nanoTime();
-	
+{	
 	private Game game;
 	
 	public InputHandler(Game game)
@@ -142,6 +139,7 @@ public class InputHandler implements KeyListener, MouseListener
 							break;
 						default:	// TileType.NULL ; Place a Stone Tile instead
 							currentWorld.replaceTile(i, TileType.STONE);
+							System.out.println("Placed a LAVA tile at (" + tileX + ", " + tileY + ")");
 					}
 				}
 			}
@@ -344,7 +342,6 @@ public class InputHandler implements KeyListener, MouseListener
 		if(keyCode == KeyEvent.VK_0)
 		{
 			KEY_0.toggle(isPressed);
-		}
 		
 /*			GUIHandler guiHandler = (GUIHandler) Game.handlers.get("gui");
 			List<Object> list = guiHandler.getItems();
@@ -361,7 +358,7 @@ public class InputHandler implements KeyListener, MouseListener
 			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(9).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
-			
+		}
 		if(keyCode == KeyEvent.VK_ESCAPE)	// ESCAPE
 		{
 			System.exit(0);  //TODO: Replace this with a method that gracefully shuts the game down
