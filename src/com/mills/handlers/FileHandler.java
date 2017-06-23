@@ -22,13 +22,23 @@ public class FileHandler
 	private static List<Object> save = new ArrayList<Object>();
 	private static List<Object> load = new ArrayList<Object>();
 	
-	public static List<Object> prepareGame(GUIHandler gui, Game game, InputHandler ih, WorldHandler wh)
+	/**
+	 * Puts what needs to be saved into a {@link List} for easy save and load
+	 * @param gui - GUIHandler
+	 * @param wh - WorldHandler
+	 * @return a List<Object> that holds the stuff we need to save the game
+	 */
+	public static List<Object> prepareGame(GUIHandler gui, WorldHandler wh)
 	{
 		save.add(gui);
 		save.add(wh);
 		return save;
 	}
 	
+	/**
+	 * Save the game to the hard drive
+	 * @param game
+	 */
 	public static void saveGame(Game game)
 	{
 		try
@@ -69,7 +79,7 @@ public class FileHandler
 		}
 	}
 	
-	public void loadGame(Game game)
+	public List<Object> loadGame(Game game)
 	{
 		try
 		{
@@ -91,14 +101,17 @@ public class FileHandler
 			
 			System.out.println("World successfully loaded!");
 			
+			return load;
 		} catch(IOException ioe)
 		{
 			System.err.println(ioe.getMessage());
 			ioe.printStackTrace();
+			return null;
 		} catch (ClassNotFoundException e)
 		{
 			System.err.println(e.getMessage());
 			e.printStackTrace();
+			return null;
 		}
 	}
 }

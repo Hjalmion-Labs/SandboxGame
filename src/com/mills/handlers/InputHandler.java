@@ -203,7 +203,7 @@ public class InputHandler implements KeyListener, MouseListener
 			if(isPressed)
 			{
 				/* Save the game to the HD */
-				FileHandler.prepareGame((GUIHandler)Game.handlers.get("gui"), game, this, (WorldHandler)Game.handlers.get("world"));
+				FileHandler.prepareGame((GUIHandler)Game.handlers.get("gui"), (WorldHandler)Game.handlers.get("world"));
 				FileHandler.saveGame(game);
 			}
 		}
