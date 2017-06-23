@@ -47,7 +47,6 @@ public class Game extends Canvas implements Runnable{
 	private final InputHandler inputHandler = new InputHandler(this);
 	private final WorldHandler worldHandler = new WorldHandler();
 	private final GUIHandler guiHandler = new GUIHandler();
-	private final FileHandler fileHandler = new FileHandler();
 	
 	public static final Map<String, Object> handlers = new HashMap<String, Object>();
 	
@@ -106,7 +105,6 @@ public class Game extends Canvas implements Runnable{
 		handlers.put("input", inputHandler);
 		handlers.put("world", worldHandler);
 		handlers.put("gui", guiHandler);
-		handlers.put("file", fileHandler);
 		
 		System.out.println("Set up the main window");
 
