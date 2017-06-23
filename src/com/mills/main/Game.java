@@ -269,14 +269,4 @@ public class Game extends Canvas implements Runnable
 		g.dispose();
 		bs.show();
 	}
-	
-	public List<Object> save()
-	{
-		List<Object> list = new ArrayList<Object>();
-		list.add(handlers);
-		list.add(currentWorld);
-		
-		return list;
-	}
-	
 }

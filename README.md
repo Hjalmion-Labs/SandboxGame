@@ -11,6 +11,10 @@ s - move down
 
 d - move right
 
+k - save the game
+
+l - load the game
+
 
 left click - place tile at cursor
 
