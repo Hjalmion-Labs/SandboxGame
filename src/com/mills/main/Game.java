@@ -103,7 +103,7 @@ public class Game extends Canvas implements Runnable{
 		currentWorld.addEntity(player);
 		currentWorld.addEntity(zombie);
 		
-		/* Map the handlers to the integer keys, so we can access them in other classes */
+		/* Map the handlers to the string keys, so we can access them in other classes */
 		handlers.put("input", inputHandler);
 		handlers.put("world", worldHandler);
 		handlers.put("gui", guiHandler);
