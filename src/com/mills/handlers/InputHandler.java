@@ -28,7 +28,7 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		game.addMouseListener(this);
 	}
 	
-	public class Key
+	public class Key implements Serializable
 	{
 		private boolean pressed = false;
 		private int numTimesPressed = 0;

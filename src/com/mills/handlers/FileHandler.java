@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,16 +34,7 @@ public class FileHandler
 	{
 		try
 		{	
-			File dir = new File(FileHandler.class.getClassLoader().getResource(File.separator).getPath());
-			
-			if(!dir.exists())
-			{
-				dir.mkdirs();
-			}
-			
-			System.out.println(dir.getAbsolutePath());
-			
-			file = new File(dir, File.separator + "worlds" + File.separator + "test.world");
+			File file = new File("D:\\Programming\\Java\\workspace\\CompSciFinal\\test.world");
 			
 			if(!file.exists())
 			{
