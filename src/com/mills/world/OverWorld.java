@@ -4,8 +4,8 @@ import com.mills.entities.Zombie;
 import com.mills.handlers.EntityHandler;
 import com.mills.handlers.TileHandler;
 import com.mills.main.Game;
-import com.mills.world.tiles.GrassTile;
 import com.mills.world.tiles.Tile;
+import com.mills.world.tiles.TileType;
 
 public class OverWorld extends World 
 {
@@ -24,7 +24,7 @@ public class OverWorld extends World
 		{
 			for(int j = 0; j < HEIGHT; j++)
 			{
-				tileHandler.addTile(new GrassTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT, false));
+				tileHandler.addTile(new Tile(TileType.GRASS, this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT));
 				temp++;
 			}
 		}

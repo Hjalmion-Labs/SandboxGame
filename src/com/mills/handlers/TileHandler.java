@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mills.world.tiles.Tile;
+import com.mills.world.tiles.TileType;
 
 public class TileHandler implements Serializable 
 {
@@ -32,9 +33,9 @@ public class TileHandler implements Serializable
 		return tiles.get(index);
 	}
 	
-	public void replaceTile(int index, Tile tile)
+	public void replaceTile(int index, TileType type)
 	{
-		tiles.set(index, tile);
+		tiles.get(index).setType(type);
 	}
 	
 	public int size()

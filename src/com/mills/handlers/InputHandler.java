@@ -12,13 +12,8 @@ import com.mills.main.Game;
 import com.mills.rendering.gui.toolbar.Toolbar;
 import com.mills.rendering.gui.toolbar.ToolbarBox;
 import com.mills.world.World;
-import com.mills.world.tiles.DirtTile;
-import com.mills.world.tiles.GrassTile;
-import com.mills.world.tiles.LavaTile;
-import com.mills.world.tiles.StoneTile;
 import com.mills.world.tiles.Tile;
 import com.mills.world.tiles.TileType;
-import com.mills.world.tiles.WaterTile;
 
 public class InputHandler implements KeyListener, MouseListener, Serializable{
 	
@@ -117,23 +112,23 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 					switch(currentType)
 					{
 						case DIRT:
-							currentWorld.replaceTile(i, new DirtTile(currentWorld, tileX, tileY, true));
+							currentWorld.replaceTile(i, TileType.DIRT);
 							System.out.println("Placed a DIRT tile at (" + tileX + ", " + tileY + ")");
 							break;
 						case GRASS:
-							currentWorld.replaceTile(i, new GrassTile(currentWorld, tileX, tileY, true));
+							currentWorld.replaceTile(i, TileType.GRASS);
 							System.out.println("Placed a GRASS tile at (" + tileX + ", " + tileY + ")");
 							break;
 						case STONE:
-							currentWorld.replaceTile(i, new StoneTile(currentWorld, tileX, tileY, true));
+							currentWorld.replaceTile(i, TileType.STONE);
 							System.out.println("Placed a STONE tile at (" + tileX + ", " + tileY + ")");
 							break;
 						case WATER:
-							currentWorld.replaceTile(i, new WaterTile(currentWorld, tileX, tileY, true));
+							currentWorld.replaceTile(i, TileType.WATER);
 							System.out.println("Placed a WATER tile at (" + tileX + ", " + tileY + ")");
 							break;
 						case LAVA:
-							currentWorld.replaceTile(i, new LavaTile(currentWorld, tileX, tileY, true));
+							currentWorld.replaceTile(i, TileType.LAVA);
 							System.out.println("Placed a LAVA tile at (" + tileX + ", " + tileY + ")");
 							break;
 						default:	// TileType.NULL ; Don't place a Tile

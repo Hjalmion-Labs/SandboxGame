@@ -4,6 +4,7 @@ import com.mills.entities.Entity;
 import com.mills.handlers.EntityHandler;
 import com.mills.handlers.TileHandler;
 import com.mills.world.tiles.Tile;
+import com.mills.world.tiles.TileType;
 
 public abstract class World {
 
@@ -33,9 +34,9 @@ public abstract class World {
 	protected TileHandler tileHandler;
 	protected EntityHandler entityHandler;
 	
-	public void replaceTile(int index, Tile tile)
+	public void replaceTile(int index, TileType type)
 	{
-		tileHandler.replaceTile(index, tile);
+		tileHandler.replaceTile(index, type);
 	}
 	
 	public abstract void createWorld();
