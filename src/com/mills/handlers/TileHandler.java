@@ -1,11 +1,13 @@
 package com.mills.handlers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mills.world.tiles.Tile;
 
-public class TileHandler {
+public class TileHandler implements Serializable 
+{
 
 	private List<Tile> tiles = new ArrayList<Tile>();
 	
