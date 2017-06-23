@@ -94,8 +94,14 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		int button = e.getButton();
 		if(button == MouseEvent.BUTTON1)
 		{
+<<<<<<< HEAD
 			int x = e.getX() / Tile.TILEWIDTH - (int)Math.ceil((((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().xOffset / Tile.TILEWIDTH));	// Puts the x as a x Tile coordinate with consideration to any offset
 			int y = e.getY() / Tile.TILEHEIGHT - (int)Math.ceil((((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().yOffset / Tile.TILEHEIGHT));	// Puts the y as a y Tile coordinate with consideration to any offset
+=======
+			//TODO: Have to take into consideration any offset of the world
+			int x = e.getX() / Tile.TILEWIDTH - (((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().xOffset / Tile.TILEWIDTH);	// Puts the x as a x Tile coordinate with consideration to any offset
+			int y = e.getY() / Tile.TILEHEIGHT - (((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().yOffset / Tile.TILEHEIGHT) ;	// Puts the y as a y Tile coordinate with consideration to any offset
+>>>>>>> Fix things again...
 			
 			System.out.println("Clicked at (" + x + ", " + y + ")");
 			
@@ -195,8 +201,15 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			if(isPressed)
 			{
+<<<<<<< HEAD
 				FileHandler.prepareGame((GUIHandler)Game.handlers.get("gui"), game, (WorldHandler)Game.handlers.get("world"));
 				FileHandler.saveGame(game);
+=======
+				FileHandler handler = (FileHandler) Game.handlers.get("file");
+				List<Object> testWorld = new ArrayList<Object>();
+				testWorld.add((WorldHandler) Game.handlers.get(1));
+				handler.saveGame(testWorld, game);
+>>>>>>> Fix things again...
 			}
 		}
 		if(keyCode == KeyEvent.VK_1)
@@ -328,7 +341,7 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		if(keyCode == KeyEvent.VK_0)
 		{
 			KEY_0.toggle(isPressed);
-/*			GUIHandler guiHandler = (GUIHandler) Game.handlers.get(3);
+/*			GUIHandler guiHandler = (GUIHandler) Game.handlers.get("gui");
 			List<Object> list = guiHandler.getItems();
 			Toolbar bar = (Toolbar) list.get(0);
 			bar.getBox(0).setActive(true);
