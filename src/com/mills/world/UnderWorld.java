@@ -4,8 +4,8 @@ import com.mills.entities.Zombie;
 import com.mills.handlers.EntityHandler;
 import com.mills.handlers.TileHandler;
 import com.mills.main.Game;
-import com.mills.world.tiles.StoneTile;
 import com.mills.world.tiles.Tile;
+import com.mills.world.tiles.TileType;
 
 public class UnderWorld extends World {
 
@@ -23,7 +23,7 @@ public class UnderWorld extends World {
 		{
 			for(int j = 0; j < HEIGHT; j++)
 			{
-				tileHandler.addTile(new StoneTile(this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT, false));
+				tileHandler.addTile(new Tile(TileType.STONE, this, i * Tile.TILEWIDTH, j * Tile.TILEHEIGHT));
 				temp++;
 			}
 		}

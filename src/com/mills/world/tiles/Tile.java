@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import com.mills.world.World;
 
-public abstract class Tile {
+public class Tile {
 
 	protected String name;
 	protected TileType type;
@@ -19,39 +19,15 @@ public abstract class Tile {
 	public static final int TILEWIDTH = 50;
 	public static final int TILEHEIGHT = 50;
 	
-	public Tile(TileType type, World world, int x, int y, boolean wasPlaced)
+	public Tile(TileType type, World world, int x, int y)
 	{
 		this.type = type;
 		this.world = world;
-		if(wasPlaced)	// User placed this Tile
-		{
-			if(world.xOffset == 0 && world.yOffset == 0)	// Offsets are zero
-			{
-				if(x == 0)
-				{
-					this.oX = 0;
-				}
-				if(y == 0)
-				{
-					this.oY = 0;
-				}
-				if(x != 0 && y != 0)
-				{
-					this.oX = x * TILEWIDTH;
-					this.oY = y * TILEHEIGHT;
-				}
-			} else	// offsets are non-zero
-			{
-				this.tileX = x;
-				this.tileY = y;
-			}
-		} else	// Not placed
-		{
-			this.oX = x;
-			this.oY = y;
-			tileX = x / TILEWIDTH;
-			tileY = y / TILEHEIGHT;
-		}
+		this.oX = x;
+		this.oY = y;
+		tileX = x / TILEWIDTH;
+		tileY = y / TILEHEIGHT;
+		TILECOLOR = type.getColor();
 	}
 
 	public boolean contains(int x, int y)
@@ -64,6 +40,7 @@ public abstract class Tile {
 	public void setType(TileType type)
 	{
 		this.type = type;
+		TILECOLOR = type.getColor();
 	}
 	
 	public int getX()
@@ -103,6 +80,11 @@ public abstract class Tile {
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, TILEWIDTH, TILEHEIGHT);
 	}
-	public abstract void tick();
+	
+	public void tick()
+	{
+		x = oX + world.xOffset;
+		y = oY + world.yOffset;
+	}
 	
 }
