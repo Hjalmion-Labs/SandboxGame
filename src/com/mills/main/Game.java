@@ -8,7 +8,9 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
@@ -47,7 +49,6 @@ public class Game extends Canvas implements Runnable{
 	public static World currentWorld;
 	
 	private final InputHandler inputHandler = new InputHandler(this);
-	private final EntityHandler entityHandler = new EntityHandler();
 	private final WorldHandler worldHandler = new WorldHandler();
 	private final GUIHandler guiHandler = new GUIHandler();
 	private final FileHandler fileHandler = new FileHandler();
@@ -107,10 +108,9 @@ public class Game extends Canvas implements Runnable{
 		
 		/* Map the handlers to the integer keys, so we can access them in other classes */
 		handlers.put(0, inputHandler);
-		handlers.put(1, entityHandler);
-		handlers.put(2, worldHandler);
-		handlers.put(3, guiHandler);
-		handlers.put(4, fileHandler);
+		handlers.put(1, worldHandler);
+		handlers.put(2, guiHandler);
+		handlers.put(3, fileHandler);
 		
 		System.out.println("Set up the main window");
 
@@ -124,14 +124,12 @@ public class Game extends Canvas implements Runnable{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.add(this, BorderLayout.CENTER);
-//		frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.requestFocus();
 		requestFocus();
 		
-//		screen = new Screen(currentWorld.WIDTH, currentWorld.HEIGHT, new SpriteSheet("/SpriteSheet.png"));
 		
 		System.out.println("Done Initialization");
 	}
@@ -238,22 +236,25 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		Graphics g = bs.getDrawGraphics();
-		Graphics2D g2 = (Graphics2D) g;
 		
 		/* START DRAWING */
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.drawImage(image, 0, 0, null);
 		worldHandler.render(g);
-		/* Set Rendering Hints so we can draw the player nice and smooth */
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		entityHandler.render(g);
-		/* Turn AntiAlias off so it doesn't affect any other objects being drawn */
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 		guiHandler.render(g);
 		/* END DRAWING */
 		
 		g.dispose();
 		bs.show();
+	}
+	
+	public List<Object> save()
+	{
+		List<Object> list = new ArrayList<Object>();
+		list.add(handlers);
+		list.add(currentWorld);
+		
+		return list;
 	}
 	
 }

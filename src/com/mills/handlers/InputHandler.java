@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import com.mills.world.tiles.Tile;
 import com.mills.world.tiles.TileType;
 import com.mills.world.tiles.WaterTile;
 
-public class InputHandler implements KeyListener, MouseListener{
+public class InputHandler implements KeyListener, MouseListener, Serializable{
 	
 	protected long last = System.nanoTime();
 	
@@ -200,9 +201,9 @@ public class InputHandler implements KeyListener, MouseListener{
 		{
 			if(isPressed)
 			{
-				FileHandler handler = (FileHandler) Game.handlers.get(4);
+				FileHandler handler = (FileHandler) Game.handlers.get(3);
 				List<Object> testWorld = new ArrayList<Object>();
-				testWorld.add((WorldHandler) Game.handlers.get(2));
+				testWorld.add((WorldHandler) Game.handlers.get(1));
 				handler.saveGame(testWorld, game);
 			}
 		}

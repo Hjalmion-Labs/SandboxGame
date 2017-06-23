@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mills.main.Game;
@@ -17,6 +18,12 @@ public class FileHandler
 	private FileOutputStream outStream;
 	private ObjectInputStream input;
 	private FileInputStream inputStream;
+	
+	public ArrayList<Object> prepareGame(Game game, GUIHandler gui, InputHandler ih, WorldHandler wh)
+	{
+		
+		return new ArrayList<Object>();
+	}
 	
 	public void saveGame(List<Object> toSave, Game game)
 	{
