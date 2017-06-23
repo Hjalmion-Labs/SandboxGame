@@ -195,11 +195,8 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			if(isPressed)
 			{
-				FileHandler.prepareGame((GUIHandler)Game.handlers.get("gui"), this, (WorldHandler)Game.handlers.get("world"));
-				FileHandler handler = (FileHandler) Game.handlers.get("file");
-				List<Object> testWorld = new ArrayList<Object>();
-				testWorld.add((WorldHandler) Game.handlers.get(1));
-				handler.saveGame(game);
+				FileHandler.prepareGame((GUIHandler)Game.handlers.get("gui"), game, (WorldHandler)Game.handlers.get("world"));
+				FileHandler.saveGame(game);
 			}
 		}
 		if(keyCode == KeyEvent.VK_1)

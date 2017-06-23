@@ -14,31 +14,38 @@ import com.mills.main.Game;
 
 public class FileHandler
 {
-	private File file;
-	private ObjectOutputStream output;
-	private FileOutputStream outStream;
-	private ObjectInputStream input;
-	private FileInputStream inputStream;
+	private static File file;
+	private static ObjectOutputStream output;
+	private static FileOutputStream outStream;
+	private static ObjectInputStream input;
+	private static FileInputStream inputStream;
 	
 	private static List<Object> save = new ArrayList<Object>();
+	private static List<Object> load = new ArrayList<Object>();
 	
-	public static List<Object> prepareGame(GUIHandler gui, InputHandler ih, WorldHandler wh)
+	public static List<Object> prepareGame(GUIHandler gui, Game game, WorldHandler wh)
 	{
 		save.add(gui);
-		save.add(ih);
 		save.add(wh);
 		return save;
 	}
 	
-	public void saveGame(Game game)
+	public static void saveGame(Game game)
 	{
 		try
 		{	
-			File file = new File("D:\\Programming\\Java\\workspace\\CompSciFinal\\test.world");
+			File dir = new File("D:\\Programming\\Java\\workspace\\CompSciFinal\\worlds\\");
 			
+			if(!dir.exists())
+			{
+				System.out.println("Directory doesn't exist.. Creating it now!");
+				dir.mkdirs();
+			}
+			
+			file = new File(dir, "test.world");
 			if(!file.exists())
 			{
-				System.out.println("File doesn't exist.. Creating it now!");
+				System.out.println("File doesn't exist... Creating it now!");
 				file.createNewFile();
 			}
 			
@@ -81,7 +88,7 @@ public class FileHandler
 			inputStream = new FileInputStream(file);
 			input = new ObjectInputStream(inputStream);
 			
-			List<Object> world = (List<Object>) input.readObject();
+			load = (List<Object>) input.readObject();
 			
 			System.out.println("World successfully loaded!");
 			

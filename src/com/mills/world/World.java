@@ -1,12 +1,15 @@
 package com.mills.world;
 
+import java.io.Serializable;
+
 import com.mills.entities.Entity;
 import com.mills.handlers.EntityHandler;
 import com.mills.handlers.TileHandler;
 import com.mills.world.tiles.Tile;
 import com.mills.world.tiles.TileType;
 
-public abstract class World {
+public abstract class World implements Serializable
+{
 
 	protected String name;
 	

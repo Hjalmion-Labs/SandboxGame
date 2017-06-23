@@ -1,10 +1,12 @@
 package com.mills.world.tiles;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import com.mills.world.World;
 
-public class Tile {
+public class Tile implements Serializable 
+{
 
 	protected String name;
 	protected TileType type;
