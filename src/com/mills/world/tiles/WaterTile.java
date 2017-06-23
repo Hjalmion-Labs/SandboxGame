@@ -20,7 +20,8 @@ public class WaterTile extends Tile
 	@Override
 	public void tick()
 	{
-		
+		x = oX + world.xOffset;
+		y = oY + world.yOffset;
 	}
 	
 }

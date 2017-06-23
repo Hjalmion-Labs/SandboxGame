@@ -99,7 +99,6 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		int button = e.getButton();
 		if(button == MouseEvent.BUTTON1)
 		{
-			//TODO: Have to take into consideration any offset of the world
 			int x = e.getX() / Tile.TILEWIDTH - (((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().xOffset / Tile.TILEWIDTH);	// Puts the x as a x Tile coordinate with consideration to any offset
 			int y = e.getY() / Tile.TILEHEIGHT - (((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().yOffset / Tile.TILEHEIGHT) ;	// Puts the y as a y Tile coordinate with consideration to any offset
 			

@@ -1,7 +1,5 @@
 package com.mills.world.tiles;
 
-import java.awt.Graphics;
-
 import com.mills.world.World;
 
 public class GrassTile extends Tile
@@ -13,7 +11,7 @@ public class GrassTile extends Tile
 	}
 
 	@Override
-	public void render(Graphics g)
+	public void render(java.awt.Graphics g)
 	{
 		super.render(g);
 	}
