@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 
 import com.mills.entities.Player;
 import com.mills.entities.Zombie;
-import com.mills.handlers.FileHandler;
 import com.mills.handlers.GUIHandler;
 import com.mills.handlers.InputHandler;
 import com.mills.handlers.WorldHandler;
