@@ -101,18 +101,10 @@ public class Game extends Canvas implements Runnable{
 		currentWorld.addEntity(player);
 		currentWorld.addEntity(zombie);
 		
-<<<<<<< HEAD
 		/* Map the handlers to the string keys, so we can access them in other classes */
 		handlers.put("input", inputHandler);
 		handlers.put("world", worldHandler);
 		handlers.put("gui", guiHandler);
-=======
-		/* Map the handlers to the integer keys, so we can access them in other classes */
-		handlers.put("input", inputHandler);
-		handlers.put("world", worldHandler);
-		handlers.put("gui", guiHandler);
-		handlers.put("file", fileHandler);
->>>>>>> Fix things again...
 		
 		System.out.println("Set up the main window");
 
