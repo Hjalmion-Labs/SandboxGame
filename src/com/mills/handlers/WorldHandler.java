@@ -1,5 +1,6 @@
 package com.mills.handlers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import com.mills.world.DefaultWorld;
 import com.mills.world.World;
 
+<<<<<<< HEAD
 /**
  * Handles all of the Worlds in the Game, allowing them to be easily updated and rendered
  * @author Nick Mills
@@ -14,6 +16,11 @@ import com.mills.world.World;
  */
 public class WorldHandler {
 	
+=======
+public class WorldHandler implements Serializable 
+{
+
+>>>>>>> master
 	private List<World> worlds = new ArrayList<World>();
 	/* Reference to the last World that was retrieved by WorldHandler#get() */
 	protected World currentWorld;

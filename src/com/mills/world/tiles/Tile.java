@@ -1,10 +1,12 @@
 package com.mills.world.tiles;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import com.mills.world.World;
 
-public abstract class Tile {
+public class Tile implements Serializable 
+{
 
 	protected String name;
 	protected TileType type;
@@ -19,10 +21,11 @@ public abstract class Tile {
 	public static final int TILEWIDTH = 50;
 	public static final int TILEHEIGHT = 50;
 	
-	public Tile(TileType type, World world, int x, int y, boolean wasPlaced)
+	public Tile(TileType type, World world, int x, int y)
 	{
 		this.type = type;
 		this.world = world;
+<<<<<<< HEAD
 		if(wasPlaced)
 		{
 			this.oX = x * TILEWIDTH;
@@ -37,6 +40,13 @@ public abstract class Tile {
 			tileY = y / TILEHEIGHT;
 		}
 		
+=======
+		this.oX = x;
+		this.oY = y;
+		tileX = x / TILEWIDTH;
+		tileY = y / TILEHEIGHT;
+		TILECOLOR = type.getColor();
+>>>>>>> master
 	}
 
 	public boolean contains(int x, int y)
@@ -49,6 +59,7 @@ public abstract class Tile {
 	public void setType(TileType type)
 	{
 		this.type = type;
+		TILECOLOR = type.getColor();
 	}
 	
 	public int getX()
@@ -88,6 +99,11 @@ public abstract class Tile {
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, TILEWIDTH, TILEHEIGHT);
 	}
-	public abstract void tick();
+	
+	public void tick()
+	{
+		x = oX + world.xOffset;
+		y = oY + world.yOffset;
+	}
 	
 }

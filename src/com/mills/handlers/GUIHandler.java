@@ -1,11 +1,12 @@
 package com.mills.handlers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mills.rendering.gui.toolbar.Toolbar;
 
-public class GUIHandler
+public class GUIHandler implements Serializable
 {
 	/**
 	 * The Toolbar that is drawn at the bottom middle of the screen

@@ -4,18 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
 
 import com.mills.entities.Player;
 import com.mills.entities.Zombie;
-import com.mills.handlers.EntityHandler;
 import com.mills.handlers.GUIHandler;
 import com.mills.handlers.InputHandler;
 import com.mills.handlers.WorldHandler;
@@ -23,7 +22,6 @@ import com.mills.rendering.Display;
 import com.mills.world.OverWorld;
 import com.mills.world.UnderWorld;
 import com.mills.world.World;
-import com.mills.world.tiles.Tile;
 
 public class Game extends Canvas implements Runnable
 {
@@ -57,13 +55,20 @@ public class Game extends Canvas implements Runnable
 	
 	/* Handles all of the input for the Game */
 	private final InputHandler inputHandler = new InputHandler(this);
+<<<<<<< HEAD
 	/* Handles all of the World for the Game */
+=======
+>>>>>>> master
 	private final WorldHandler worldHandler = new WorldHandler();
 	/* Handles any UI elements for the Game */
 	private final GUIHandler guiHandler = new GUIHandler();
 	
+<<<<<<< HEAD
 	/* Allows other classes to easily reference the handlers of the Game */
 	public static final Map<Integer, Object> handlers = new HashMap<Integer, Object>();
+=======
+	public static final Map<String, Object> handlers = new HashMap<String, Object>();
+>>>>>>> master
 	
 	/* The Player for the game */
 	public static Player player;
@@ -117,19 +122,30 @@ public class Game extends Canvas implements Runnable
 		
 		/* Instantiate the Player */
 		player = new Player("Player1", currentWorld, WIDTH / 2, HEIGHT / 2, 5);
+<<<<<<< HEAD
 		player.setPos(currentWorld.getTile(currentWorld.getWidth() / 2));	// We want the Player on the middle Tile
+=======
+>>>>>>> master
 		
 		/* Create a test Zombie */
 		Zombie zombie = new Zombie("George", currentWorld, 50, 50);
+		zombie.setPos(currentWorld.getTile(2 * currentWorld.getWidth() + 1));
 		
 		/* Add Entities to the world's entity handler */
 		currentWorld.addEntity(player);
 		currentWorld.addEntity(zombie);
 		
+<<<<<<< HEAD
 		/* Map the handlers to the integer keys, so we can access them in other classes */
 		handlers.put(0, inputHandler);
 		handlers.put(1, worldHandler);
 		handlers.put(2, guiHandler);
+=======
+		/* Map the handlers to the string keys, so we can access them in other classes */
+		handlers.put("input", inputHandler);
+		handlers.put("world", worldHandler);
+		handlers.put("gui", guiHandler);
+>>>>>>> master
 		
 		System.out.println("Set up the main window");
 
@@ -143,14 +159,12 @@ public class Game extends Canvas implements Runnable
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.add(this, BorderLayout.CENTER);
-//		frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.requestFocus();
 		requestFocus();
 		
-//		screen = new Screen(currentWorld.WIDTH, currentWorld.HEIGHT, new SpriteSheet("/SpriteSheet.png"));
 		
 		System.out.println("Done Initialization");
 	}
@@ -202,7 +216,7 @@ public class Game extends Canvas implements Runnable
 				lastTimer += 1000;
 				System.out.println(ticks + " ticks, " + frames + " frames");
 				System.out.println("Current World: " + worldHandler.getCurrentWorld());
-				System.out.println("X: " + (player.getX() / Tile.TILEWIDTH) + "\nY: " + (player.getY() / Tile.TILEHEIGHT));
+				System.out.println("X: " + player.getTileX() + "\nY: " + player.getTileY());
 
 				frames = 0;
 				ticks = 0;
@@ -263,21 +277,32 @@ public class Game extends Canvas implements Runnable
 		}
 		
 		Graphics g = bs.getDrawGraphics();
-		Graphics2D g2 = (Graphics2D) g;
 		
 		/* START DRAWING */
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.drawImage(image, 0, 0, null);
 		worldHandler.render(g);
+<<<<<<< HEAD
 		/* Set Rendering Hints so we can draw the player nice and smooth */
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		/* Turn AntiAlias off so it doesn't affect any other objects being drawn */
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+=======
+>>>>>>> master
 		guiHandler.render(g);
 		/* END DRAWING */
 		
 		g.dispose();
 		bs.show();
+	}
+	
+	public List<Object> save()
+	{
+		List<Object> list = new ArrayList<Object>();
+		list.add(handlers);
+		list.add(currentWorld);
+		
+		return list;
 	}
 	
 }
