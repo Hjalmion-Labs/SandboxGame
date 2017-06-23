@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.mills.main.Game;
@@ -15,6 +14,10 @@ import com.mills.world.World;
 import com.mills.world.tiles.Tile;
 import com.mills.world.tiles.TileType;
 
+/**
+ * Instantiates the InputHandler and adds this to the {@link Game} as the {@link KeyListener} and {@link MouseListener}
+ * @param game - Game to add this to
+ */
 public class InputHandler implements KeyListener, MouseListener, Serializable{
 	
 	protected long last = System.nanoTime();
@@ -28,6 +31,11 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		game.addMouseListener(this);
 	}
 	
+	/**
+	 * Class that represents a Key on the keyboard.
+	 * @author Nick Mills
+	 *
+	 */
 	public class Key implements Serializable
 	{
 		private boolean pressed = false;
@@ -35,16 +43,29 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		
 		public int keyCode;
 		
+		/**
+		 * <strong>Getter</strong><br>
+		 * Gets the number of times this Key was pressed
+		 * @return an int of how many times this Key has been pressed
+		 */
 		public int getNumTimesPressed()
 		{
 			return numTimesPressed;
 		}
 		
+		/**
+		 * Returns true if {@link Key#pressed} is true, false otherwise
+		 * @return whether or not this Key is pressed
+		 */
 		public boolean isPressed()
 		{
 			return pressed;
 		}
 		
+		/**
+		 * Set this Key to the supplied state (true or false), and increment {@link Key#numTimesPressed}
+		 * @param isPressed - state that this Key should be in
+		 */
 		public void toggle(boolean isPressed)
 		{
 			pressed = isPressed;
@@ -203,12 +224,15 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_1.toggle(isPressed);
 			
+			/* Loop through all of the ToolbarBoxes and set each box's state to inactive*/
 			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
+			/* Set the ToolbarBox at the first position to active */
 			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(0).setActive(true);
+			/* Set the currentType equal to the Tile that the ToolbarBox represents */
 			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(0).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
@@ -300,7 +324,7 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		if(keyCode == KeyEvent.VK_8)
 		{
 			KEY_8.toggle(isPressed);
-			
+		
 			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
@@ -328,7 +352,9 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		if(keyCode == KeyEvent.VK_0)
 		{
 			KEY_0.toggle(isPressed);
-/*			GUIHandler guiHandler = (GUIHandler) Game.handlers.get(3);
+		}
+		
+/*			GUIHandler guiHandler = (GUIHandler) Game.handlers.get("gui");
 			List<Object> list = guiHandler.getItems();
 			Toolbar bar = (Toolbar) list.get(0);
 			bar.getBox(0).setActive(true);
@@ -343,7 +369,7 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(9).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
-		}
+			
 		if(keyCode == KeyEvent.VK_ESCAPE)	// ESCAPE
 		{
 			System.exit(0);  //TODO: Replace this with a method that gracefully shuts the game down

@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 
 import com.mills.entities.Player;
 import com.mills.entities.Zombie;
-import com.mills.handlers.FileHandler;
 import com.mills.handlers.GUIHandler;
 import com.mills.handlers.InputHandler;
 import com.mills.handlers.WorldHandler;
@@ -24,34 +23,51 @@ import com.mills.world.OverWorld;
 import com.mills.world.UnderWorld;
 import com.mills.world.World;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable
+{
+	private static final long serialVersionUID = 8125218200279626336L;	// Needed for Runnable
 
-	private static final long serialVersionUID = 8125218200279626336L;
-
+	/* The Thread to run this Game with */
 	private Thread thread;
+	/* Whether or not the Game is running */
 	private static boolean isRunning;
 
+	/* Width of the screen, in pixels */
 	public static final int WIDTH = 1080;
+	/* Height of the screen, in pixels. The height is calculated by using the Width and generating a 16:9 aspect ratio */
 	public static final int HEIGHT = WIDTH / 16 * 9;
+	/* Width of the screen, in pixels, if the OS running the Game is Linux / Unix based */
 	public static final int LINUXWIDTH = 700;
+	/* Height of the screen, in pixels, if the OS running the Game is Linux / Unix based. */
 	public static final int LINUXHEIGHT = 400;
 
+	/* The name of the OS running the Game.  */
 	public static final String osName = System.getProperty("os.name");
 
+	/* This image is the background of the game */
 	private static final BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	
+	/* The window that the Game lives in. Instantiated by Display.create(...) */
 	private static JFrame frame;
 
+	/* The current World that we are in */
 	public static World currentWorld;
 	
+	/* Handles all of the input for the Game */
 	private final InputHandler inputHandler = new InputHandler(this);
+	/* Handles all of the World for the Game */
 	private final WorldHandler worldHandler = new WorldHandler();
+	/* Handles any UI elements for the Game */
 	private final GUIHandler guiHandler = new GUIHandler();
 	
 	public static final Map<String, Object> handlers = new HashMap<String, Object>();
 	
+	/* The Player for the game */
 	public static Player player;
 	
+	/**
+	 * Starts the game
+	 */
 	public synchronized void start()
 	{
 		if(isRunning) return;
@@ -63,6 +79,9 @@ public class Game extends Canvas implements Runnable{
         	thread.start();
 	}
 
+	/**
+	 * Stops the game
+	 */
 	public synchronized void stop()
 	{
 		if(!isRunning) return;
@@ -78,6 +97,9 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 
+	/**
+	 * Helper method that instantiates anything that is needed and wasn't instantiated already
+	 */
 	private void init()
 	{
 		System.out.println("Initialize..");
@@ -183,6 +205,9 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 	
+	/**
+	 * Runs usually about 60 times a second. All updates go here
+	 */
 	public void tick()
 	{
 		worldHandler.tick();
@@ -220,6 +245,9 @@ public class Game extends Canvas implements Runnable{
 			
 	}
 	
+	/**
+	 * Draws everything to the screen
+	 */
 	public void render()
 	{		
 		BufferStrategy bs = getBufferStrategy();
