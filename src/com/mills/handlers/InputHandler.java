@@ -7,7 +7,6 @@ import java.awt.event.MouseListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.FileHandler;
 
 import com.mills.main.Game;
 import com.mills.rendering.gui.toolbar.Toolbar;
@@ -101,15 +100,15 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		if(button == MouseEvent.BUTTON1)
 		{
 			//TODO: Have to take into consideration any offset of the world
-			int x = e.getX() / Tile.TILEWIDTH - (((WorldHandler)(Game.handlers.get(2))).getCurrentWorld().xOffset / Tile.TILEWIDTH);	// Puts the x as a x Tile coordinate with consideration to any offset
-			int y = e.getY() / Tile.TILEHEIGHT - (((WorldHandler)(Game.handlers.get(2))).getCurrentWorld().yOffset / Tile.TILEHEIGHT) ;	// Puts the y as a y Tile coordinate with consideration to any offset
+			int x = e.getX() / Tile.TILEWIDTH - (((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().xOffset / Tile.TILEWIDTH);	// Puts the x as a x Tile coordinate with consideration to any offset
+			int y = e.getY() / Tile.TILEHEIGHT - (((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld().yOffset / Tile.TILEHEIGHT) ;	// Puts the y as a y Tile coordinate with consideration to any offset
 			
 			System.out.println("Clicked at (" + x + ", " + y + ")");
 			
 			/* Loops over the World */
 			for(int i = 0; i < Game.currentWorld.getSize(); i++)
 			{
-				World currentWorld = ((WorldHandler)(Game.handlers.get(2))).getCurrentWorld();	// Get the current World
+				World currentWorld = ((WorldHandler)(Game.handlers.get("world"))).getCurrentWorld();	// Get the current World
 				Tile currentTile = currentWorld.getTile(i);	// Get the tile at this position
 				if(currentTile.getTileX() == x && currentTile.getTileY() == y)	// If user clicked in the Tile
 				{
@@ -202,7 +201,7 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			if(isPressed)
 			{
-				FileHandler handler = (FileHandler) Game.handlers.get(3);
+				FileHandler handler = (FileHandler) Game.handlers.get("file");
 				List<Object> testWorld = new ArrayList<Object>();
 				testWorld.add((WorldHandler) Game.handlers.get(1));
 				handler.saveGame(testWorld, game);
@@ -212,13 +211,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_1.toggle(isPressed);
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(0).setActive(true);
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(0).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(0).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(0).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
@@ -226,13 +225,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_2.toggle(isPressed);
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(1).setActive(true);
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(1).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(1).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(1).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
@@ -240,13 +239,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_3.toggle(isPressed);
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(2).setActive(true);
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(2).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(2).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(2).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
@@ -254,13 +253,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_4.toggle(isPressed);
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(3).setActive(true);
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(3).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(3).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(3).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
@@ -268,13 +267,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_5.toggle(isPressed);
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(4).setActive(true);
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(4).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(4).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(4).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
@@ -282,13 +281,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_6.toggle(isPressed);
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(5).setActive(true);
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(5).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(5).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(5).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
@@ -296,13 +295,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_7.toggle(isPressed);
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(6).setActive(true);
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(6).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(6).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(6).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
@@ -310,13 +309,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_8.toggle(isPressed);
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(7).setActive(true);
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(7).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(7).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(7).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
@@ -324,13 +323,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 		{
 			KEY_9.toggle(isPressed);
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(8).setActive(true);
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(8).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(8).setActive(true);
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(8).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
@@ -343,13 +342,13 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 			bar.getBox(0).setActive(true);
 */			
 			
-			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBoxes())
+			for(ToolbarBox box : ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBoxes())
 			{
 				box.setActive(false);
 			}
 			
-			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(9).setActive(true);	// This is so ugly, but works, so it stays ¯\_(ツ)_/¯
-			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get(3)).getItems()).get(0)).getBox(9).getTile();
+			((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(9).setActive(true);	// This is so ugly, but works, so it stays ¯\_(ツ)_/¯
+			currentType = ((Toolbar)((List<Object>)((GUIHandler) Game.handlers.get("gui")).getItems()).get(0)).getBox(9).getTile();
 			if(isPressed)	// If we pressed (not released) the key
 				System.out.println(currentType);
 		}
