@@ -6,19 +6,22 @@ import java.awt.Graphics;
 import com.mills.world.World;
 import com.mills.world.tiles.Tile;
 
+/**
+ * The Player is the Entity that the user controls
+ * @author Nick Mills
+ *
+ */
 public class Player extends Entity
 {
 	protected static final int radius = 30;
 	protected static final Color color = Color.BLUE;
-	protected int originalSpeed;
 	
 	public Player(String name, World world, int x, int y, int speed)
 	{
 		super(name, world, x, y);
-		this.originalSpeed = speed;
+		this.speed = speed;
 		this.width = radius;
 		this.height = radius;
-		this.speed = originalSpeed;
 	}
 
 	@Override
@@ -34,9 +37,13 @@ public class Player extends Entity
 		g.fillOval(x, y, width, height);
 	}
 	
-	public void placeAt(Tile xTile, Tile yTile)
+	/**
+	 * Place this Player at the specified Tile. 
+	 * @param tile - The Tile to place this Player on
+	 */
+	public void placeAt(Tile tile)
 	{
-		setTileX(xTile);
-		setTileY(yTile);
+		setTileX(tile);
+		setTileY(tile);
 	}
 }
