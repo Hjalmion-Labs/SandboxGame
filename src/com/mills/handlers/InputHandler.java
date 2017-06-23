@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.Serializable;
 import java.util.List;
 
 import com.mills.main.Game;
@@ -18,7 +17,8 @@ import com.mills.world.tiles.TileType;
  * Instantiates the InputHandler and adds this to the {@link Game} as the {@link KeyListener} and {@link MouseListener}
  * @param game - Game to add this to
  */
-public class InputHandler implements KeyListener, MouseListener, Serializable{
+public class InputHandler implements KeyListener, MouseListener
+{
 	
 	protected long last = System.nanoTime();
 	
@@ -36,7 +36,7 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 	 * @author Nick Mills
 	 *
 	 */
-	public class Key implements Serializable
+	public class Key
 	{
 		private boolean pressed = false;
 		private int numTimesPressed = 0;
@@ -152,8 +152,8 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 							currentWorld.replaceTile(i, TileType.LAVA);
 							System.out.println("Placed a LAVA tile at (" + tileX + ", " + tileY + ")");
 							break;
-						default:	// TileType.NULL ; Don't place a Tile
-							continue;
+						default:	// TileType.NULL ; Place a Stone Tile instead
+							currentWorld.replaceTile(i, TileType.STONE);
 					}
 				}
 			}
@@ -217,7 +217,7 @@ public class InputHandler implements KeyListener, MouseListener, Serializable{
 			if(isPressed)
 			{
 				/* Save the game to the HD */
-				FileHandler.prepareGame((GUIHandler)Game.handlers.get("gui"), game, (WorldHandler)Game.handlers.get("world"));
+				FileHandler.prepareGame((GUIHandler)Game.handlers.get("gui"), game, this, (WorldHandler)Game.handlers.get("world"));
 				FileHandler.saveGame(game);
 			}
 		}

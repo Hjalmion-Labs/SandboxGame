@@ -22,7 +22,7 @@ public class FileHandler
 	private static List<Object> save = new ArrayList<Object>();
 	private static List<Object> load = new ArrayList<Object>();
 	
-	public static List<Object> prepareGame(GUIHandler gui, Game game, WorldHandler wh)
+	public static List<Object> prepareGame(GUIHandler gui, Game game, InputHandler ih, WorldHandler wh)
 	{
 		save.add(gui);
 		save.add(wh);

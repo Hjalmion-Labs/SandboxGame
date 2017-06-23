@@ -7,7 +7,6 @@ import com.mills.world.World;
 
 public class Tile implements Serializable 
 {
-
 	protected String name;
 	protected TileType type;
 	protected int x;
