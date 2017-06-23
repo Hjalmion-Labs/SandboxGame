@@ -55,20 +55,12 @@ public class Game extends Canvas implements Runnable
 	
 	/* Handles all of the input for the Game */
 	private final InputHandler inputHandler = new InputHandler(this);
-<<<<<<< HEAD
 	/* Handles all of the World for the Game */
-=======
->>>>>>> master
 	private final WorldHandler worldHandler = new WorldHandler();
 	/* Handles any UI elements for the Game */
 	private final GUIHandler guiHandler = new GUIHandler();
 	
-<<<<<<< HEAD
-	/* Allows other classes to easily reference the handlers of the Game */
-	public static final Map<Integer, Object> handlers = new HashMap<Integer, Object>();
-=======
 	public static final Map<String, Object> handlers = new HashMap<String, Object>();
->>>>>>> master
 	
 	/* The Player for the game */
 	public static Player player;
@@ -122,10 +114,6 @@ public class Game extends Canvas implements Runnable
 		
 		/* Instantiate the Player */
 		player = new Player("Player1", currentWorld, WIDTH / 2, HEIGHT / 2, 5);
-<<<<<<< HEAD
-		player.setPos(currentWorld.getTile(currentWorld.getWidth() / 2));	// We want the Player on the middle Tile
-=======
->>>>>>> master
 		
 		/* Create a test Zombie */
 		Zombie zombie = new Zombie("George", currentWorld, 50, 50);
@@ -135,17 +123,10 @@ public class Game extends Canvas implements Runnable
 		currentWorld.addEntity(player);
 		currentWorld.addEntity(zombie);
 		
-<<<<<<< HEAD
-		/* Map the handlers to the integer keys, so we can access them in other classes */
-		handlers.put(0, inputHandler);
-		handlers.put(1, worldHandler);
-		handlers.put(2, guiHandler);
-=======
 		/* Map the handlers to the string keys, so we can access them in other classes */
 		handlers.put("input", inputHandler);
 		handlers.put("world", worldHandler);
 		handlers.put("gui", guiHandler);
->>>>>>> master
 		
 		System.out.println("Set up the main window");
 
@@ -282,13 +263,6 @@ public class Game extends Canvas implements Runnable
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.drawImage(image, 0, 0, null);
 		worldHandler.render(g);
-<<<<<<< HEAD
-		/* Set Rendering Hints so we can draw the player nice and smooth */
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		/* Turn AntiAlias off so it doesn't affect any other objects being drawn */
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-=======
->>>>>>> master
 		guiHandler.render(g);
 		/* END DRAWING */
 		

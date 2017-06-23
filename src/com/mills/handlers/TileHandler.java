@@ -1,5 +1,6 @@
 package com.mills.handlers;
 
+import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,16 +8,12 @@ import java.util.List;
 import com.mills.world.tiles.Tile;
 import com.mills.world.tiles.TileType;
 
-<<<<<<< HEAD
 /**
  * Handles the updating and rendering of {@link Tile}s which are stored as an {@link ArrayList}. Use this object
  * to interact with any Tiles.
  */
-public class TileHandler {
-=======
 public class TileHandler implements Serializable 
 {
->>>>>>> master
 
 	/**
 	 * {@link ArrayList} of {@link Tile}s.
@@ -56,16 +53,12 @@ public class TileHandler implements Serializable
 		return tiles.get(index);
 	}
 	
-<<<<<<< HEAD
 	/**
 	 * Replaces the {@link Tile} at the specified position, <i>index</i> with the supplied Tile
 	 * @param index - Position to replace 
 	 * @param tile - Tile to replace existing Tile with
 	 */
-	public void replaceTile(int index, Tile tile)
-=======
 	public void replaceTile(int index, TileType type)
->>>>>>> master
 	{
 		tiles.get(index).setType(type);
 	}

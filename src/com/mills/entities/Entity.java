@@ -64,17 +64,6 @@ public abstract class Entity {
 		return name;
 	}
 	
-<<<<<<< HEAD
-	/**
-	 * Set this Entity's current position to the provided {@link Tile} coordinates
-	 * @param x - 
-	 * @param y
-	 */
-	public void setPos(Tile tile)
-	{
-		x = tile.getX();
-		y = tile.getY();
-=======
 	public void detectCollision(Entity ent1, Entity ent2)
 	{
 		Dimension center1 = new Dimension(ent1.getX() + (ent1.getWidth() / 2), ent1.getY() + (ent1.getHeight() / 2));
@@ -103,7 +92,6 @@ public abstract class Entity {
 	public int getHeight()
 	{
 		return height;
->>>>>>> master
 	}
 	
 	/**
@@ -144,11 +132,7 @@ public abstract class Entity {
 	 */
 	public void setTileX(Tile tileX)
 	{
-<<<<<<< HEAD
 		this.tileX = tileX.getTileX();
-=======
-		tileX = tile.getTileX();
->>>>>>> master
 	}
 	
 	/**
@@ -188,11 +172,7 @@ public abstract class Entity {
 	 */
 	public void setTileY(Tile tileY)
 	{
-<<<<<<< HEAD
 		this.tileY = tileY.getTileY();
-=======
-		tileY = tile.getTileY();
->>>>>>> master
 	}
 	
 	/**

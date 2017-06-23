@@ -25,28 +25,11 @@ public class Tile implements Serializable
 	{
 		this.type = type;
 		this.world = world;
-<<<<<<< HEAD
-		if(wasPlaced)
-		{
-			this.oX = x * TILEWIDTH;
-			this.oY = y * TILEHEIGHT;
-			tileX = x;
-			tileY = y;
-		} else
-		{
-			this.oX = x;
-			this.oY = y;
-			tileX = x / TILEWIDTH;
-			tileY = y / TILEHEIGHT;
-		}
-		
-=======
 		this.oX = x;
 		this.oY = y;
 		tileX = x / TILEWIDTH;
 		tileY = y / TILEHEIGHT;
 		TILECOLOR = type.getColor();
->>>>>>> master
 	}
 
 	public boolean contains(int x, int y)
