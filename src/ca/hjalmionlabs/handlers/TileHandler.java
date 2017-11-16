@@ -11,6 +11,8 @@ import ca.hjalmionlabs.world.tiles.TileType;
 /**
  * Handles the updating and rendering of {@link Tile}s which are stored as an {@link ArrayList}. Use this object
  * to interact with any Tiles.
+ * 
+ * @author Knifesurge
  */
 public class TileHandler implements Serializable 
 {

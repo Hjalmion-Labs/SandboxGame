@@ -29,6 +29,10 @@ public class ToolbarBox
 		tile = TileType.NULL;
 	}
 
+	/**
+	 * Draws the ToolbarBox to the screen
+	 * @param g
+	 */
 	public void render(java.awt.Graphics g)
 	{
 		if(!isActive)
@@ -43,12 +47,20 @@ public class ToolbarBox
 		}
 	}
 	
+	/**
+	 * Set the TileType of this ToolbarBox
+	 * @param type
+	 */
 	public void setTile(TileType type)
 	{
 		tile = type;
 		color = tile.getColor();
 	}
 	
+	/**
+	 * Get the TileType of this ToolbarBox
+	 * @return
+	 */
 	public TileType getTile()
 	{
 		return tile;

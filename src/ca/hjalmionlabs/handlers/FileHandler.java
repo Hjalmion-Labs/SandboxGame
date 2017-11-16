@@ -79,7 +79,7 @@ public class FileHandler
 		}
 	}
 	
-	public List<Object> loadGame(Game game)
+	public static List<Object> loadGame(Game game)
 	{
 		try
 		{

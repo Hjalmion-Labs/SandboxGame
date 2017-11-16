@@ -207,6 +207,14 @@ public class InputHandler implements KeyListener, MouseListener
 				FileHandler.saveGame(game);
 			}
 		}
+		if(keyCode == KeyEvent.VK_L)
+		{
+			if(isPressed)
+			{
+				/* Load the game from the HD */
+				FileHandler.loadGame(game);
+			}
+		}
 		if(keyCode == KeyEvent.VK_1)
 		{
 			KEY_1.toggle(isPressed);

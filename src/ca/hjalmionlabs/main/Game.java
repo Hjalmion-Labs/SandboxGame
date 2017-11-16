@@ -150,6 +150,9 @@ public class Game extends Canvas implements Runnable
 		System.out.println("Done Initialization");
 	}
 	
+	/**
+	 * Hold the main game loop 
+	 */
 	public void run()
 	{
 		long lastTime = System.nanoTime();
